@@ -1,0 +1,33 @@
+// Place all the styles related to the reader controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+    height:2000px;
+    color: black;
+    font:12px "Helvetica";
+}
+#readerNavi {
+    position:absolute;
+    top:150px;
+    left: 0%;
+    margin-left:2px;
+    width:200px;
+	
+}
+#readerNavi ul {
+    margin-bottom:10px;
+	list-style-type: none;
+}
+#readerNavi ul li a {
+    display: block;
+    border:1px solid #999;
+    background-color:#222;
+    border-left:6px solid #999;
+    text-decoration:none;
+    color:#ccc;
+    padding:5px 5px 5px 25px;
+}
+#readerNavi ul li a:hover {
+	background-color: gold;
+	color: black;
+}
