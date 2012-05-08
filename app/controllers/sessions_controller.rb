@@ -9,12 +9,7 @@ class SessionsController < ApplicationController
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
         
-   #     case user.role
-    #    when User.admin
-    #      redirect_to admin_url
-    #    when User.reader
-    #      redirect_to reader_url
-    #    end
+
         redirect_to eval("#{user.role}_url")
         
       else

@@ -1,4 +1,6 @@
 Reader::Application.routes.draw do
+  resource :subscriptions
+
   resources :feeds
 
   get "welcome/index"
@@ -6,12 +8,18 @@ Reader::Application.routes.draw do
   get 'admin' => 'admin#index'
   
   get 'reader' => 'reader#index'
-  
+    
   controller :sessions do
     get    'login'  => :new
     post   'login'  => :create
     delete 'logout' => :destroy
     get 'logout' => :destroy
+  end
+  
+  controller :users do
+    get 'signup' => :new
+    post 'signup' => :create
+    delete 'signup' => :destroy
   end
 
   resources :users

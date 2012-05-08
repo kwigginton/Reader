@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-   url: MyString
+   feed_url: MyString
   title: MyString
   author: MyString
 
 two:
-   url: MyString
+   feed_url: MyString
   title: MyString
   author: MyString

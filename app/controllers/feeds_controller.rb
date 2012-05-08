@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  skip_before_filter :authorize_admin
   # GET /feeds
   # GET /feeds.json
   def index
@@ -44,7 +45,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
+        format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -72,7 +73,7 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   # DELETE /feeds/1.json
   def destroy
-    @feed = Feed.find(params[:id])
+    @feed = Feed.find_by_url(params[:feed])
     @feed.destroy
 
     respond_to do |format|

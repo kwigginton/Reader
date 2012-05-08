@@ -29,16 +29,23 @@
             <li><a href = <%= welcome_url %> title="Home">Home</a></li>
         </ul>
         <ul>
-            <li><a href="#" title="Explore new content">Explore</a></li>
-            <li><a href="#" title="My Articles">Articles</a></li>
+            <li><%= link_to "Explore", reader_path%></li>
+            <li><%= link_to "Add a feed", new_feed_path %></li>
         </ul>
         <ul>
             <li><a href="#" title="Next article">Next</a></li>
             <li><a href="#" title="Previous article">Previous</a></li>
         </ul>
+        <ul>
+            <% if is_logged_in? %>
+                <li><%= link_to "Logout", logout_path, :method => :delete %></li>
+            <% else %>
+                <li><%= link_to "Login", login_path %>
+            <% end %>
+        </ul>
     </div>
-
-<%= yield %>
-
+    <div id=readerPanel>
+        <%= yield %>
+    </div>
 </body>
 </html>

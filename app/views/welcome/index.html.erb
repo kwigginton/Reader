@@ -1,8 +1,9 @@
 
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="content_pane">
+<h1>Welcome to onReader</h1>
 <% if is_logged_in? %>
-<%= button_to 'logout', logout_path, :method => :delete %>
+    <%= button_to 'logout', logout_path, :method => :delete %>
 <% else %>
-<%= button_to 'login', login_path, :method => :get %>
+    <%= button_to 'login', login_path, :method => :get %>
 <% end %>
+</div>

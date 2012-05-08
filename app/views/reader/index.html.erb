@@ -1,5 +1,8 @@
-
-<h1><%= @entries.first.title %></h1>
-<div class=summary><%= sanitize(@entries.first.summary) %></div>
-<div class=content><%= sanitize(@entries.first.content) %></div>
-<%= button_to "logout", logout_path, :method => :delete %>
+<% @feed.entries.each do |entry| %>
+    <h1><%= entry.title %></h1>
+    <div class=summary><%= sanitize(entry.summary) %></div>
+    <div class=content><%= sanitize(entry.content) %></div>
+    
+    <hr style="height: 1px;">
+<% end %>
+<%= button_to "subscribe", subscriptions_path(feed_url: @feed.feed_url) %>

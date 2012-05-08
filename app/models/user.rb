@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
+  
+  
   validates :name, presence: true, uniqueness: true
   validates :role, presence: true
+  
+  has_many :feeds, :through => :subscriptions, dependent: :destroy
+  
   has_secure_password
   
   def self.admin
@@ -12,7 +17,8 @@ class User < ActiveRecord::Base
   end
   
   def self.is_admin(user_id)
-    User.find_by_id(user_id).role == User.admin
+    user = User.find_by_id(user_id)
+    user.role == User.admin if(user) 
   end
   
   def self.is_reader(user_id)
@@ -25,4 +31,6 @@ class User < ActiveRecord::Base
   def role
     self[ :role ]
   end
+
+    
 end

@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+body{
+	font-family: 'Crimson Text';
+	margin: 0;
+	
+}
+
+
+.content_pane{
+	font-family: 'Crimson Text';
+	font-size: 15px;
+	margin: 20px;
+	border-left:1px solid #999999;
+
+}
+.banner {
+		font-family: 'Crimson Text';
+		font-size: 15px;
+		display: block;
+		background: #999999;
+		padding: 10px;
+		height: 45px;
+		border-bottom: 2px solid;
+		margin: 0;
+}
+.banner img {
+			float: left;
+			width: 125px;
+}
+.banner .nav_menu_bar {
+	position: relative;
+	font-size: 18px;
+	top: 34px;
+	right: 200px;
+	text-align:center;
+	
+	a{
+		padding: 2px;
+		background-color: #666666;
+		color: #cccccc;
+		text-decoration:none;
+		border-top: 2px solid white;
+		border-left: 2px solid white;
+		border-right: 2px solid white;
+	}
+	a:hover {
+		background-color: #999999;
+	}
+}
+.banner .login_menu_bar {
+			float: right;
+			width: 100px;
+			a{
+				text-decoration:none;
+				color: white;
+			}
+			a:visited{
+				color:white;
+				text-decoration:none;
+			}
+			a:hover {
+				background-color: white;
+				color:black;
+			}
+}
+		
+
+
+	

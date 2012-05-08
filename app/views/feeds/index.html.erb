@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th> url</th>
+    <th>feed_url</th>
     <th>Title</th>
     <th>Author</th>
     <th></th>
@@ -12,7 +12,7 @@
 
 <% @feeds.each do |feed| %>
   <tr>
-    <td><%= feed. url %></td>
+    <td><%= feed.feed_url %></td>
     <td><%= feed.title %></td>
     <td><%= feed.author %></td>
     <td><%= link_to 'Show', feed %></td>
