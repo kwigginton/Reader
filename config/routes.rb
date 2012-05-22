@@ -1,4 +1,10 @@
 Reader::Application.routes.draw do
+  get 'explore' => 'explore#index'
+
+  get 'about'=> 'static_pages#about'
+
+  get 'faq' => 'static_pages#faq'
+
   resource :subscriptions
 
   resources :feeds
@@ -8,6 +14,16 @@ Reader::Application.routes.draw do
   get 'admin' => 'admin#index'
   
   get 'reader' => 'reader#index'
+  
+  get "reader/subscriptions" => 'reader#read_subscriptions'
+  
+  get "reader/next_random" => 'reader#next_random'
+  
+  get "reader/previous_random" => 'reader#previous_random'
+  
+  get "reader/next_subscription" => 'reader#next_subscription'
+  
+  get "reader/previous_subscription" => 'reader#previous_subscription'
     
   controller :sessions do
     get    'login'  => :new

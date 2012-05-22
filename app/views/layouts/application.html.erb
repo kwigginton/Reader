@@ -1,27 +1,40 @@
 <!DOCTYPE html>
-<% if notice %>
-	<div class="notice"><%= notice %></div>
-<% end %>
 <html>
 <head>
   <title>onReader</title>
   
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag params[:controller] %>
   <%= javascript_include_tag "application" %>
   <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
-  
+
 </head>
 <body>
-    <div class="banner">
-        <%= image_tag("logo.png")%>
+    <div class="banner shadow">
+        <%= link_to image_tag("logo.png"), welcome_path%>
         <div class="nav_menu_bar">
-            <a href="#">Explore</a>
-            <%= link_to "Read", reader_path %>
-            <a href="#">Fooblah</a>
+            <% if is_logged_in? %>
+                <%= link_to "Read", reader_subscriptions_path %>
+            <% else %>
+                <%= link_to "Read", reader_path %>
+            <% end %>
+            <%= link_to "Explore", explore_path %>
+            <%= link_to "About", about_path %>
+            <%= link_to "F.A.Q.", faq_path %>
         </div>
+        <% if notice %>
+        	<div id="notice"><%= notice %></div>
+        <% end %>
         <div class="login_menu_bar">
-            <%= link_to "login/signup", login_path%>
+            <% if is_logged_in? %>
+                <%= link_to "Logout", logout_path %>
+                <br>
+                <% if is_admin? %>
+                    <%= link_to "admin tools", admin_path %>
+                <% end 
+                else %>
+            <%= link_to "Login or Signup", login_path %>
+            <% end %>
         </div>
     </div>
     

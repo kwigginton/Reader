@@ -9,59 +9,71 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
-*/
+ */
 body{
 	font-family: 'Crimson Text';
 	margin: 0;
-	
 }
-
+#notice{
+	color:yellow;
+	position: absolute;
+	left:65%;
+	border: 1px solid red;
+	padding:5px;
+	top:15px;
+	background-color: rgba(255,50,50,.5);
+}
 
 .content_pane{
 	font-family: 'Crimson Text';
 	font-size: 15px;
 	margin: 20px;
-	border-left:1px solid #999999;
-
+	padding-left: 50px;
+	padding-right: 75px;
 }
 .banner {
-		font-family: 'Crimson Text';
-		font-size: 15px;
-		display: block;
-		background: #999999;
-		padding: 10px;
-		height: 45px;
-		border-bottom: 2px solid;
-		margin: 0;
+	font-family: 'Crimson Text';
+	font-size: 15px;
+	display: block;
+	background: #999999;
+	padding: 10px;
+	height: 45px;
+	border-bottom: 2px solid;
+	margin: 0;
 }
 .banner img {
-			float: left;
-			width: 125px;
+	position: relative;
+	float: left;
+	width: 125px;
+	height: 47px;
+	z-index: 2;
 }
 .banner .nav_menu_bar {
 	position: relative;
-	font-size: 18px;
-	top: 34px;
+	font-size: 23px;
+	top: 22px;
 	right: 200px;
 	text-align:center;
 	
 	a{
 		padding: 2px;
 		background-color: #666666;
-		color: #cccccc;
+		color: orange;
 		text-decoration:none;
 		border-top: 2px solid white;
 		border-left: 2px solid white;
 		border-right: 2px solid white;
 	}
 	a:hover {
-		background-color: #999999;
+		color: white;
 	}
 }
 .banner .login_menu_bar {
-			float: right;
-			width: 100px;
+			position: absolute;
+			top: 20px;
+			right: 25px;
+			width: 125px;
+			font-size: 18px;
 			a{
 				text-decoration:none;
 				color: white;
@@ -71,11 +83,19 @@ body{
 				text-decoration:none;
 			}
 			a:hover {
-				background-color: white;
 				color:black;
 			}
 }
-		
+.shadow {
+	/* For all other browsers */
+	-moz-box-shadow: 3px 3px 4px #666;
+	-webkit-box-shadow: 3px 3px 4px #666;
+	box-shadow: 3px 3px 4px #666;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666');
+}
 
 
 	

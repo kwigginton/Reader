@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   
   def authorize_admin
     unless User.is_admin(session[:user_id])
+      session[:return_to] = request.url
       redirect_to login_url, notice: "Please log in."
     end
   end
@@ -26,6 +27,7 @@ class ApplicationController < ActionController::Base
   
   def authorize_reader
     unless User.is_reader(session[:user_id]) || User.is_admin(session[:user_id])
+      session[:return_to] = request.url
       redirect_to login_url, notice: "Please log in"
     end
   end

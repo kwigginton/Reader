@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507180327) do
+ActiveRecord::Schema.define(:version => 20120519012355) do
 
   create_table "feeds", :force => true do |t|
     t.string   "feed_url"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20120507180327) do
     t.string   "role"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "email"
   end
 
 end

@@ -41,20 +41,21 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    feed_url = params[:feed_url]
-    feed = Feed.find_by_feed_url(feed_url)
     @subscription = Subscription.new
     @subscription.user = current_user
-    @subscription.feed = feed
-    if @subscription.save
-      redirect_to reader_url, notice: "You are now subscribed to: "+feed.title
-    else
-      # TODO
-      # This should definitely be redone to properly handle errors
-      notice = @subscription.errors.full_messages.first.to_s
-puts notice
-      redirect_to reader_url, notice: notice
-      
+    @subscription.feed = Feed.find(params[:feed_id])
+    
+    respond_to do |format|
+      if @subscription.save
+        format.html { redirect_to request.referer }
+        format.js
+        format.json { render json: @subscription, status: :created, location: @subscription}
+      else
+        # TODO
+        # This should definitely be redone to properly handle errors
+        notice = @subscription.errors.full_messages.first.to_s
+        redirect_to request.referer, notice: notice
+      end
     end
   end
 
@@ -77,11 +78,12 @@ puts notice
   # DELETE /subscriptions/1
   # DELETE /subscriptions/1.json
   def destroy
-    @subscription = Subscription.find(params[:id])
+    @subscription = Subscription.find_by_user_id_and_feed_id(session[:user_id], params[:feed_id])
     @subscription.destroy
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url }
+      format.html { redirect_to request.referer }
+      format.js
       format.json { head :no_content }
     end
   end

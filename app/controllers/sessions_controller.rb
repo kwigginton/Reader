@@ -9,7 +9,11 @@ class SessionsController < ApplicationController
       if user and user.authenticate(params[:password])
         session[:user_id] = user.id
         
-
+        if session[:return_to]
+          redirect_to session[:return_to]
+          session[:return_to] = nil
+          return
+        end
         redirect_to eval("#{user.role}_url")
         
       else

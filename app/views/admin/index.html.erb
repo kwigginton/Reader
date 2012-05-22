@@ -1,7 +1,8 @@
-<h1>Welcome back <%= User.find(session[:user_id]).name%>!</h1>
-</br>
+<div class="content_pane"><h1>Welcome back <%= User.find(session[:user_id]).name%>!</h1>
+
 <p>Find me in app/views/admin/index.html.erb</p>
 <p>Reader has: <%= pluralize(@total_users, "user") %></p>
 <!-- probably a bad idea to query the entire user database on every admin login in the long run -->
 
 <%= button_to 'logout', logout_path, :method => :delete %>
+</div>

@@ -42,6 +42,10 @@ class FeedsController < ApplicationController
   # POST /feeds.json
   def create
     @feed = Feed.new(params[:feed])
+    feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
+    @feed.title = feed.title
+    @feed.author = feed.entries.first.author
+    @feed.feed_url = feed.feed_url
 
     respond_to do |format|
       if @feed.save
@@ -73,7 +77,7 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   # DELETE /feeds/1.json
   def destroy
-    @feed = Feed.find_by_url(params[:feed])
+    @feed = Feed.find(params[:id])
     @feed.destroy
 
     respond_to do |format|

@@ -4,37 +4,57 @@
 <% end %>
 <html>
 <head>
-  <title>Reading: <%= @feed.title %></title>
+    <% if @feed %>
+      <title>Reading: <%= @feed.title %></title>
+  <% else %>
+      <title>No active subscriptions</title>
+  <% end %>
   <%= stylesheet_link_tag    "reader", :media => "all" %>
   <%= javascript_include_tag "reader" %>
+  <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-  <script language="javascript">
-      var name = "#readerNavi";
-      var menuYloc = null;
+  <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
 
-      $(document).ready(function(){
-      			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
-      			$(window).scroll(function () { 
-      				offset = menuYloc+$(document).scrollTop()+"px";
-      				$(name).animate({top:offset},{duration:200,queue:false});
-      			});
-      		});
-      
-  </script>
 </head>
 <body>
+    <div class="top_bar shadow">
+        <% if @feed %>
+            <%= @feed.title %>
+        <% end %>
+    </div>
+    <div id="leftBackDrop" class="shadow">
+    </div>
     <div id="readerNavi">
         <ul>
-            <li><a href = <%= welcome_url %> title="Home">Home</a></li>
+            <li id="home"><a href = <%= welcome_url %> title="Home">Home</a></li>
         </ul>
         <ul>
-            <li><%= link_to "Explore", reader_path%></li>
-            <li><%= link_to "Add a feed", new_feed_path %></li>
+            <% if session[:read_mode] == "random" %>
+                <li id="readSubscriptions"><%= link_to "My Subscriptions", reader_subscriptions_path %></li>
+            <% else %>
+                <li id="randomize"><%= link_to "Randomize!", reader_path %>
+            <% end %>
         </ul>
         <ul>
-            <li><a href="#" title="Next article">Next</a></li>
-            <li><a href="#" title="Previous article">Previous</a></li>
+            <li id="explore"><a href="#">Explore</a></li>
+            <!--<li id="explore"><%= link_to "Explore", explore_path %></li>-->
+            <li id="addFeed"><%= link_to "Add a feed", new_feed_path %></li>
+        </ul>
+        <ul>
+            <!-- next/previous logic block -->
+            <% unless session[:read_mode] == "subscription" %>
+                <li id="next"><%= link_to "Next", reader_next_random_path %></li>
+                <% unless session[:read_random].size == 1 %>
+                    <li id="previous"><%= link_to "Previous", reader_previous_random_path %></li>
+                <% end %>
+            <% else %>
+                <% unless session[:unread].empty? %>
+                    <li id="next"><%= link_to "Next", reader_next_subscription_path %></li>
+                <% end %>
+                <% unless session[:read].size <= 1 %>
+                    <li id="previous"><%= link_to "Previous", reader_previous_subscription_path %></li>
+                <% end %>
+            <% end %>
         </ul>
         <ul>
             <% if is_logged_in? %>
@@ -44,8 +64,9 @@
             <% end %>
         </ul>
     </div>
-    <div id=readerPanel>
+    <div class="content_pane">
         <%= yield %>
     </div>
+
 </body>
 </html>
