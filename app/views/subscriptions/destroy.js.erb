@@ -1,0 +1,5 @@
+<% if session[:read_mode] == 'subscriptions' %>
+	$('#subscribe').html("<%=j link_to 'Subscribe', subscriptions_path( feed_id: Subscription.find(session[:read_subscriptions].last).feed_id), method: :post , remote: :true %>");
+<% else %>
+	$('#subscribe').html("<%=j link_to 'Subscribe', subscriptions_path( feed_id: session[:read_random].last), method: :post , remote: :true %>");
+<% end %>

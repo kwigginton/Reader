@@ -1,4 +1,4 @@
-<h1>Listing subscriptions</h1>
+<div class="content_pane"><h1>Listing subscriptions</h1>
 
 <table>
   <tr>
@@ -9,13 +9,13 @@
 
 <% @subscriptions.each do |subscription| %>
   <tr>
-    <td><%= link_to 'Show', subscription %></td>
-    <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
-    <td><%= link_to 'Destroy', subscription, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= Feed.find_by_id(subscription.feed_id).title %></td>
+    <td><%= link_to 'Unsubscribe', subscription, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Subscription', new_subscription_path %>
+<!-- <%= link_to 'New Subscription', new_subscription_path %> -->
+</div>

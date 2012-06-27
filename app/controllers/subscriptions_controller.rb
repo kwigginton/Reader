@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
   def index
-    @subscriptions = Subscription.all
+    @subscriptions = Subscription.find_all_by_user_id(session[:user_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1
   # GET /subscriptions/1.json
   def show
-    @subscription = Subscription.find(params[:id])
+    @subscription = Subscription.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,6 +47,12 @@ class SubscriptionsController < ApplicationController
     
     respond_to do |format|
       if @subscription.save
+        
+        #since user was on the feed they wanted to subscribe to, they have already read it
+        if session[:read_subscriptions]
+          session[:read_subscriptions] << @subscription.id
+        end
+        
         format.html { redirect_to request.referer }
         format.js
         format.json { render json: @subscription, status: :created, location: @subscription}
@@ -78,9 +84,22 @@ class SubscriptionsController < ApplicationController
   # DELETE /subscriptions/1
   # DELETE /subscriptions/1.json
   def destroy
-    @subscription = Subscription.find_by_user_id_and_feed_id(session[:user_id], params[:feed_id])
+   # if params[:feed_id]
+  #    @subscription = Subscription.find_by_user_id_and_feed_id(session[:user_id], params[:feed_id])
+  #  else
+      @subscription = Subscription.find(params[:id])
+  #  end
+    
+    #Remove unwanted feed from session tracking
+    if session[:read_subscriptions]
+      session[:read_subscriptions].delete @subscription.id
+    end
+      
+      
     @subscription.destroy
+    
 
+    
     respond_to do |format|
       format.html { redirect_to request.referer }
       format.js

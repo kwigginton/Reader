@@ -4,7 +4,7 @@
 <% end %>
 <html>
 <head>
-    <% if @feed %>
+    <% if @feed and not @feed.is_a? Fixnum%>
       <title>Reading: <%= @feed.title %></title>
   <% else %>
       <title>No active subscriptions</title>
@@ -13,16 +13,25 @@
   <%= javascript_include_tag "reader" %>
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
-  <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
-
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('.entry a').click(function() {
+              window.open(this.href, 'onReader', 'width=600,height=800');
+              return false;
+          });
+      });
+  </script>
 </head>
 <body>
     <div class="top_bar shadow">
-        <% if @feed %>
+        <% if @feed and not @feed.is_a? Fixnum%>
             <%= @feed.title %>
         <% end %>
     </div>
     <div id="leftBackDrop" class="shadow">
+    </div>
+    <div id="rightBackDrop">
     </div>
     <div id="readerNavi">
         <ul>
@@ -30,43 +39,44 @@
         </ul>
         <ul>
             <% if session[:read_mode] == "random" %>
-                <li id="readSubscriptions"><%= link_to "My Subscriptions", reader_subscriptions_path %></li>
+                <li id="readSubscriptions"><%= link_to "Read Subscriptions", reader_subscriptions_path %></li>
             <% else %>
                 <li id="randomize"><%= link_to "Randomize!", reader_path %>
             <% end %>
         </ul>
         <ul>
-            <li id="explore"><a href="#">Explore</a></li>
-            <!--<li id="explore"><%= link_to "Explore", explore_path %></li>-->
+            <li id="explore"><%= link_to "Explore", explore_path %></li>
             <li id="addFeed"><%= link_to "Add a feed", new_feed_path %></li>
         </ul>
         <ul>
             <!-- next/previous logic block -->
-            <% unless session[:read_mode] == "subscription" %>
+            <% unless session[:read_mode] == "subscriptions" %>
                 <li id="next"><%= link_to "Next", reader_next_random_path %></li>
                 <% unless session[:read_random].size == 1 %>
                     <li id="previous"><%= link_to "Previous", reader_previous_random_path %></li>
                 <% end %>
             <% else %>
-                <% unless session[:unread].empty? %>
+                <% unless session[:unread_subscriptions].empty? %>
                     <li id="next"><%= link_to "Next", reader_next_subscription_path %></li>
                 <% end %>
-                <% unless session[:read].size <= 1 %>
+                <% unless session[:read_subscriptions].size <= 1 %>
                     <li id="previous"><%= link_to "Previous", reader_previous_subscription_path %></li>
                 <% end %>
             <% end %>
         </ul>
         <ul>
             <% if is_logged_in? %>
-                <li><%= link_to "Logout", logout_path, :method => :delete %></li>
+                <li><%= link_to "Log Out", logout_path, :method => :delete %></li>
             <% else %>
-                <li><%= link_to "Login", login_path %>
+                <li><%= link_to "Log In", login_path %></li>
             <% end %>
         </ul>
     </div>
+
     <div class="content_pane">
         <%= yield %>
     </div>
+
 
 </body>
 </html>

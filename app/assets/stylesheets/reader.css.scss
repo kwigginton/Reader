@@ -1,10 +1,29 @@
 // Place all the styles related to the reader controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@font-face{
+	font-family: Museo;
+	src: url('/assets/MuseoSans_300.otf');
+}
+@font-face{
+	font-family: Museo;
+	font-weight: bold;
+	src: url('/assets/MuseoSans_700.otf');
+}
+@font-face{
+	font-family: Museo;
+	font-style: italic;
+	src: url('MuseoSans_300_Italic.otf');
+}
+@font-face{
+	font-family: Cassia;
+	src: url('/assets/CassiaXLig.otf');
+}
 body {
 	margin:0;
     color: black;
-    font-family:"Crimson Text";
+    font-family: Museo, Cassia, sans-serif;
 }
 .content_pane {
 	width:80%;
@@ -12,10 +31,13 @@ body {
 	margin-top: 50px;
 	margin-left:150px;
 	margin-right:120px;
-	border-right: 2px dashed rgba(0, 0, 0, .35);
 	padding: 10px;
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
+	.entry{
+		padding-right: 60px;
+		font-family: Cassia;
+	}
 }
 .notice {
 	position: absolute;
@@ -27,27 +49,37 @@ body {
 .top_bar{
 	position: fixed;
 	height: 30px;
-	background-color: #ccc;
+	background-color: #ddd;
 	color: #333;
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
 	width: 100%;
 	text-align: center;
 	padding: 5px;
-	font-size: 20px;
-	border-bottom: 2px solid black;
+	font-size: 28px;
+	font-family: Museo;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
 	z-index: 1;
 }
 
 #leftBackDrop {
 	position:fixed;
-	background-color: #666666;
+	background-color: #455560;
 	left:0px;
 	width:130px;
 	height: 100%;
 	border-right: 2px solid black;
 	z-index: 1;
-
+}
+#rightBackDrop {
+	position:fixed;
+	background-color: #455560;
+	right:0px;
+	width:130px;
+	height: 100%;
+	border-left: 2px solid black;
+	z-index: 1;
 }
 #readerNavi {
     position:fixed;
@@ -74,7 +106,7 @@ body {
     padding:0px 0px 0px 10px;
 }
 #readerNavi ul li a:hover {
-	background-color: orange;
+	background-color: #f89728;
 	color: black;
 }
 
@@ -82,6 +114,8 @@ body {
 	text-decoration: line-through;
 }
 h1{
+	font-family: Museo, Helvetica;
+	font-weight: bold;
 	font-size: 28px;
 	-webkit-margin-after: -.10em;
 	text-decoration:underline;
@@ -89,7 +123,7 @@ h1{
 
 #subscribe {
 	position: fixed;
-	background-color: #666;
+	background-color: #455560;
 	top:5px;
 	left:130px;
 	padding-left: 3px;
@@ -122,4 +156,7 @@ h1{
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666')";
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666');
+}
+.postDateTimeOfEntry {
+	color: #444;
 }

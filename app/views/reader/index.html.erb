@@ -1,23 +1,31 @@
 <div id="subscribe" class="shadow">
 <% if session[:read_random]
-    unless is_subscribed?(session[:read_random].last)%>
-            <%= link_to 'Subscribe', subscriptions_path(feed_id: session[:read_random].last), method: :post, remote: :true %>
-        
-    <% else %>
-        <%= link_to 'Unsubscribe', subscriptions_path(feed_id: session[:read_random].last), method: :delete, remote: :true %>
+    #Hard link to log in/ sign up if guest tries to subscribe.
+    #super future TODO associate subscriptions for visitors so they don't need to sign up, but limit it to some low number.
+    if !is_logged_in? %>
+        <%= link_to 'Subscribe', login_path %>
+    <% else
+        unless is_subscribed?(session[:read_random].last) %>
+          <%= link_to 'Subscribe', subscriptions_path( feed_id: session[:read_random].last), :method => :post, remote: :true %>
+        <% else %>
+            <%= link_to 'Unsubscribe', subscription_path(Subscription.find_by_feed_id(session[:read_random].last)), :method => :delete, remote: true %>
     
-<%  end
+    <%  end
+    end
    end %>
 </div>
 
-<% @feed.entries.each do |entry| %>
+<% unless @feed.is_a? Fixnum #protect against bad feed URLs returning 404, 503 etc... TODO better handling
+    @feed.entries.each do |entry| %>
     <div class="entry">
         <h1><%= entry.title %></h1>
-        <%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %> by <%= sanitize(entry.author) %>
+        <%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %>
+        <% if entry.author %> by <%= sanitize(entry.author) %> <% end %>
         </br>
         <div class="summary"><%= sanitize(entry.summary) %></div>
         <div class="content"><%= sanitize(entry.content) %></div>
         <hr style="height: 1px;">
     </div>
+<% end %>
 <% end %>
 

@@ -1,0 +1,3 @@
+<div class="welcome">
+<h1>Welcome to onReader alpha!</h1> You'll find great new reading content is just a click away! You don't even have to sign up to begin! <a href="#">Click here to get started.</a> We're very excited to have you join us in our launch of <b>onReader</b> alpha. There are so many fantastic new things to come, but we can't get to them unless we hear from you our readers!  Please take the time to fill out the suggestion box and let us know what you think.  See something you like? Something you don't? Or maybe you think we're missing something. Your input is a precious commodity to us.
+</div>

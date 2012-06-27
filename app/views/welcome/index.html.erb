@@ -1,4 +1,8 @@
-
-<div class="content_pane">
-<h1>Welcome to onReader alpha!</h1> You'll find that awesome new reading content is just a click away! You don't even have to sign up to begin! <a href="#">Click here to get started.</a> We're very excited to have you join us in our launch of onReader alpha. There are so many fantastic new things to come, but we can't get to them unless we hear from you our readers!  Please take the time to fill out the suggestions box and let us know what you think.... See something you like? Something you don't? Or maybe you think we're missing something. Your input is a precious commodity to us.
+<div class="description">
+    the best things to read are at your fingertips
+</div>
+<div class="button_bar">
+    <%= link_to 'Read', {:controller => :reader, :action => :index}, :class => 'button read' %>
+    <%= link_to 'Explore', {:controller => :explore, :action => :index}, :class => 'button explore' %>
+    <%= link_to 'About us', {:controller => :static_pages, :action => :about}, :class => 'button about' %>
 </div>

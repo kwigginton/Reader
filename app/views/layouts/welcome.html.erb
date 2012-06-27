@@ -3,20 +3,19 @@
 <head>
   <title>onReader</title>
   
-  <%= stylesheet_link_tag params[:controller] %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "welcome" %>
+  <%= javascript_include_tag "welcome" %>
   <%= csrf_meta_tags %>
 
 </head>
 <body>
 
-
-        <div class="header">
-            <%= link_to image_tag(src="oR_splash.png", :id => "logo", :alt => "onReader"), welcome_path %>
+    <div class="splash">
+        <div class="center">
+            <%= link_to image_tag(src="oR_splash.png", :id => "logo", :alt => "onReader"), reader_path %>
+            <%= yield %>
         </div>
-        
-        <%= yield %>
-        
+    </div>
     <div class="login">
         <% if is_logged_in? %>
             <%= link_to "Log Out", logout_path, :method => :delete %>

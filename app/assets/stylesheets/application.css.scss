@@ -10,82 +10,62 @@
  *
  *= require_self
  */
-body{
-	font-family: 'Crimson Text';
+html, body{
+	font-family: Helvetica, sans;
 	margin: 0;
+	
+	h1{
+		padding-left: 20px;
+	}
 }
+
 #notice{
-	color:yellow;
+	color: red;
 	position: absolute;
-	left:65%;
+	left: 30px;
 	border: 1px solid red;
-	padding:5px;
-	top:15px;
-	background-color: rgba(255,50,50,.5);
+	padding: 5px;
+	top: 30px;
+	background-color: black;
+}
+
+.header{
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	padding-top: 25px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid gray;
+	text-align: -webkit-center;
+}
+
+.login{
+	position: fixed;
+	right: 40px;
+	top: 20px;
+	text-align: -webkit-center;
+	a{
+		text-decoration: underlined;
+	}
+	a:visited{
+		color:black;
+	}
+	a:hover {
+		color: #FF9A42;
+	}
 }
 
 .content_pane{
-	font-family: 'Crimson Text';
+	margin-top: 150px;
 	font-size: 15px;
-	margin: 20px;
-	padding-left: 50px;
-	padding-right: 75px;
+	height: 50%;
+	margin-left: 50px;
+	margin-right: 50px;
+	border-right: 1px black solid;
+	border-left: 1px black solid;
+	padding: 15px;
 }
-.banner {
-	font-family: 'Crimson Text';
-	font-size: 15px;
-	display: block;
-	background: #999999;
-	padding: 10px;
-	height: 45px;
-	border-bottom: 2px solid;
-	margin: 0;
-}
-.banner img {
-	position: relative;
-	float: left;
-	width: 125px;
-	height: 47px;
-	z-index: 2;
-}
-.banner .nav_menu_bar {
-	position: relative;
-	font-size: 23px;
-	top: 22px;
-	right: 200px;
-	text-align:center;
-	
-	a{
-		padding: 2px;
-		background-color: #666666;
-		color: orange;
-		text-decoration:none;
-		border-top: 2px solid white;
-		border-left: 2px solid white;
-		border-right: 2px solid white;
-	}
-	a:hover {
-		color: white;
-	}
-}
-.banner .login_menu_bar {
-			position: absolute;
-			top: 20px;
-			right: 25px;
-			width: 125px;
-			font-size: 18px;
-			a{
-				text-decoration:none;
-				color: white;
-			}
-			a:visited{
-				color:white;
-				text-decoration:none;
-			}
-			a:hover {
-				color:black;
-			}
-}
+
 .shadow {
 	/* For all other browsers */
 	-moz-box-shadow: 3px 3px 4px #666;
@@ -96,6 +76,3 @@ body{
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666');
 }
-
-
-	

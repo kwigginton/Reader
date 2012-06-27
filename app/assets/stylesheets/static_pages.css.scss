@@ -1,0 +1,12 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+//= require application
+.question {
+	border: 1px solid gray;
+	background-color: #ccc;
+	font-size: 17px;
+}
+.answer {
+	margin-left: 20px;
+}

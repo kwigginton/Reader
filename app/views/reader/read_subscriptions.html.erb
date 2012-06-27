@@ -1,0 +1,25 @@
+<div id="subscribe" class="shadow">
+<% if session[:read_subscriptions]
+    
+    # !!! A user should not be displayed a feed he is not subscribed to while in subscriptions view %>
+    
+        <%= link_to 'Unsubscribe', subscription_path(session[:read_subscriptions].last), :method => :delete, remote: true %>
+<% end %>
+</div>
+<% if @feed %>
+    <% @feed.entries.each do |entry| %>
+        <div class="entry">
+            <h1><%= entry.title %></h1>
+            <%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %>
+            </br>
+            <div class="summary"><%= sanitize(entry.summary) %></div>
+            <div class="content"><%= sanitize(entry.content) %></div>
+            <div class="author">
+            <hr style="height: 1px;">
+        </div>
+    <% end %>
+<% else %>
+<div class = "entry">
+    <h1>You have no active subscriptions!</h1>
+</div>
+<% end %>

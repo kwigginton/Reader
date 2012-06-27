@@ -46,7 +46,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created with role: #{@user.role}" }
+        
+        format.html { post_signup(@user.name, @user.password) }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -80,6 +81,25 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+  
+  private
+  
+  def post_signup(name, password)
+    user = User.find_by_name(name)
+    if user and user.authenticate(password)
+      session[:user_id] = user.id
+      
+      if session[:return_to]
+        redirect_to session[:return_to]
+        session[:return_to] = nil
+        return
+      end
+      redirect_to eval("#{user.role}_url")
+      
+    else
+      redirect_to login_url, alert: "Invalid user/password combination"
     end
   end
 end

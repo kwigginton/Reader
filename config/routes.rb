@@ -5,8 +5,8 @@ Reader::Application.routes.draw do
 
   get 'faq' => 'static_pages#faq'
 
-  resource :subscriptions
-
+  resources :subscriptions
+  
   resources :feeds
 
   get "welcome/index"

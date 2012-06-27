@@ -1,0 +1,6 @@
+<% if session[:read_mode] == 'subscriptions' %>
+	$('#subscribe').html("<%=j link_to 'Unsubscribe', subscription_path(session[:read_subscriptions].last), method: :delete, remote: true %>");
+
+<% else %>
+	$('#subscribe').html("<%=j link_to 'Unsubscribe', subscription_path(Subscription.find_by_feed_id(session[:read_random].last)), method: :delete, remote: true %>");
+<% end %>

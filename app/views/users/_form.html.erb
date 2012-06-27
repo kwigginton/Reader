@@ -1,21 +1,23 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <!--
+      <h2><%= pluralize(@user.errors.count, "error") %> prevented your sign up:</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
-      </ul>
+      </ul> -->
+      Please fill in the required fields.
     </div>
   <% end %>
 
-  <fieldset>
+  <fieldset class="signup">
   <legend>Enter User Details</legend>
 
   <div>
-    <%= f.label :name, 'Name' %>:
+    <%= f.label :name, '<b>Username</b>'.html_safe %>:
     <%= f.text_field :name, size: 40 %>
   </div>
   
@@ -25,12 +27,12 @@
   </div>
 
   <div>
-    <%= f.label :password, 'Password' %>:
+    <%= f.label :password, '<b>Password</b>'.html_safe %>:
     <%= f.password_field :password, size: 40 %>
   </div>
 
   <div>
-    <%= f.label :password_confirmation, 'Confirm' %>:
+    <%= f.label :password_confirmation, '<b>Confirm</b>'.html_safe %>:
     <%= f.password_field :password_confirmation, size: 40 %>
   </div>
 

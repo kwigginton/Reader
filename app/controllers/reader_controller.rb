@@ -7,7 +7,7 @@ class ReaderController < ApplicationController
   def index
     #Set current read_mode to random only
     session[:read_mode] = "random"
-    puts "---------setting read_Mode to #{session[:read_mode]} --------------"
+    
     if session[:unread_random] and not session[:unread_random].empty?
       
       #pop last :unread feed id and push into :read
@@ -43,34 +43,28 @@ class ReaderController < ApplicationController
     end
   end
   
+  #ALL of this unnecessary database polling could be eliminated with an extra session variable, but for now I will leave it be.
+  
   def read_subscriptions
     #Set current read_mode to subscriptions only
-    session[:read_mode] = "subscription"
-    puts "---------setting read_Mode to #{session[:read_mode]} --------------"
-    puts "---------you've already read--------------"
-    session[:read].each do |id|
-      puts "feed: #{id}"
-    end
-    puts "---------you've not yet read--------------"
-    session[:unread].each do |id|
-      puts "feed: #{id}"
-    end
-    if session[:unread] and not session[:unread].empty?
+    session[:read_mode] = "subscriptions"
+    
+    if session[:unread_subscriptions] and not session[:unread_subscriptions].empty?
       
       #pop last :unread feed id and push into :read
-      session[:read] << session[:unread].last
-      next_feed = Feed.find(session[:unread].pop)
+      session[:read_subscriptions] << session[:unread_subscriptions].last
+      next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
       
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
       
       return
     end
-    session[:read] = []
-    session[:unread] = ActiveRecord::Base.connection.select_values("select feed_id from subscriptions where user_id =#{session[:user_id]}")
-    unless session[:unread].empty?
-      session[:unread].shuffle
-      session[:read] << session[:unread].last
-      next_feed = Feed.find(session[:unread].pop)
+    session[:read_subscriptions] = []
+    session[:unread_subscriptions] = ActiveRecord::Base.connection.select_values("select id from subscriptions where user_id =#{session[:user_id]}")
+    unless session[:unread_subscriptions].empty?
+      session[:unread_subscriptions].shuffle
+      session[:read_subscriptions] << session[:unread_subscriptions].last
+      next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
       return
     else
@@ -81,68 +75,57 @@ class ReaderController < ApplicationController
   
   
   def next_subscription
-    if session[:unread] and not session[:unread].empty?
+    if session[:unread_subscriptions] and not session[:unread_subscriptions].empty?
       
-      session[:read] << session[:unread].last
-      next_feed = Feed.find(session[:unread].pop)
+      session[:read_subscriptions] << session[:unread_subscriptions].last
+      next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
     else
       
-      session[:read] = []
-      session[:unread] = ActiveRecord::Base.connection.select_values("select feed_id from subscriptions where user_id =#{session[:user_id]}")
-      session[:unread].shuffle
-      session[:read] << session[:unread].last
-      next_feed = Feed.find(session[:unread].pop)
+      session[:read_subscriptions] = []
+      session[:unread_subscriptions] = ActiveRecord::Base.connection.select_values("select id from subscriptions where user_id =#{session[:user_id]}")
+      session[:unread_subscriptions].shuffle
+      session[:read_subscriptions] << session[:unread_subscriptions].last
+      next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
     end
     
-    @subscription = Subscription.find_by_user_id_and_feed_id(session[:user_id], session[:read].last)
+    @subscription = Subscription.find(session[:read_subscriptions].last)
     render 'read_subscriptions'
     
-    puts "-------HERE ARE YOUR VARIABLES-----"
-    puts "read"
-    puts session[:read]
-    puts "unread"
-    puts session[:unread]
-    puts "-----------------------------------"
   end
   
   def previous_subscription
     
-    if session[:read] and not session[:read].empty?
+    if session[:read_subscriptions] and not session[:read_subscriptions].empty?
       
-      session[:unread] << session[:read].pop
-      next_feed = Feed.find(session[:unread].last)
+      session[:unread_subscriptions] << session[:read_subscriptions].pop
+      next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].last).feed_id)
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
     else
       
-      session[:unread] = []
-      session[:unread] = ActiveRecord::Base.connection.select_values("select feed_id from subscriptions where user_id =#{session[:user_id]}")
-      session[:unread].shuffle
-      session[:read] << session[:unread].last
-      next_feed = Feed.find(session[:unread].pop)
+      session[:unread_subscriptions] = []
+      session[:unread_subscriptions] = ActiveRecord::Base.connection.select_values("select id from subscriptions where user_id =#{session[:user_id]}")
+      session[:unread_subscriptions].shuffle
+      session[:read_subscriptions] << session[:unread_subscriptions].last
+      next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
     end
     
     render :index
     
-    puts "-------HERE ARE YOUR VARIABLES-----"
-    puts "read"
-    puts session[:read]
-    puts "unread"
-    puts session[:unread]
-    puts "-----------------------------------"
   end
   
   def next_random
-
+    
+    #if user is already reading
     if session[:unread_random] and not session[:unread_random].empty?
-      
+      #Load the next unread feed and parse to view.
       session[:read_random] << session[:unread_random].last
       next_feed = Feed.find(session[:unread_random].pop)
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
     else
-      
+      #if user is just starting reading, init vars and fill with all feed ids in random order.
       session[:read_random] = []
       session[:unread_random] = ActiveRecord::Base.connection.select_values("select id from feeds")
       session[:unread_random].shuffle
@@ -152,13 +135,7 @@ class ReaderController < ApplicationController
     end
     
     render :index
-    
-    puts "-------HERE ARE YOUR VARIABLES-----"
-    puts "read_random"
-    puts session[:read_random]
-    puts "unread_random"
-    puts session[:unread_random]
-    puts "-----------------------------------"
+
   end
   
   def previous_random
