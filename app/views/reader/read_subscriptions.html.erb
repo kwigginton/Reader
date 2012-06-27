@@ -1,5 +1,5 @@
 <div id="subscribe" class="shadow">
-<% if session[:read_subscriptions]
+<% if not session[:read_subscriptions].empty?
     
     # !!! A user should not be displayed a feed he is not subscribed to while in subscriptions view %>
     

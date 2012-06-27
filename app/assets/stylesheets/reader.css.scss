@@ -35,7 +35,7 @@ body {
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
 	.entry{
-		padding-right: 60px;
+		padding-right: 120px;
 		font-family: Cassia;
 	}
 }
@@ -80,6 +80,22 @@ body {
 	height: 100%;
 	border-left: 2px solid black;
 	z-index: 1;
+}
+.login{
+	position: fixed;
+	right: 15px;
+	top: 10px;
+	text-align: -webkit-center;
+	z-index: 1;
+	a{
+		text-decoration: underline;
+	}
+	a:visited{
+		color: #DDD;
+	}
+	a:hover {
+		color: #F89728;
+	}
 }
 #readerNavi {
     position:fixed;
@@ -157,6 +173,7 @@ h1{
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666');
 }
-.postDateTimeOfEntry {
-	color: #444;
+.byline {
+	font-family: Museo;
+	font-style: italic;
 }

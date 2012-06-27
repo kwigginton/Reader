@@ -1,4 +1,4 @@
-<div class="content_pane"><h1>Listing subscriptions</h1>
+<div class="content_pane"><h1>Your subscriptions</h1>
 
 <table>
   <tr>
@@ -7,12 +7,16 @@
     <th></th>
   </tr>
 
-<% @subscriptions.each do |subscription| %>
-  <tr>
-    <td><%= Feed.find_by_id(subscription.feed_id).title %></td>
-    <td><%= link_to 'Unsubscribe', subscription, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<% if not @subscriptions.empty?
+    @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= Feed.find_by_id(subscription.feed_id).title %></td>
+        <td><%= link_to 'Unsubscribe', subscription, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+<% end
+else %>
+    You have no active subscriptions, but there's tons more interesting stuff out there! 
+<% end%>
 </table>
 
 <br />

@@ -33,6 +33,15 @@
     </div>
     <div id="rightBackDrop">
     </div>
+    <div class="login">
+        <% if is_logged_in? %>
+            <%= link_to raw("Manage</br>Subscriptions"), subscriptions_path %>
+            </br>
+            <%= link_to "Log Out", logout_path, :method => :delete %>
+        <% else %>
+            <%= link_to "Log In", login_path %>
+        <% end %>
+    </div>
     <div id="readerNavi">
         <ul>
             <li id="home"><a href = <%= welcome_url %> title="Home">Home</a></li>
@@ -62,13 +71,6 @@
                 <% unless session[:read_subscriptions].size <= 1 %>
                     <li id="previous"><%= link_to "Previous", reader_previous_subscription_path %></li>
                 <% end %>
-            <% end %>
-        </ul>
-        <ul>
-            <% if is_logged_in? %>
-                <li><%= link_to "Log Out", logout_path, :method => :delete %></li>
-            <% else %>
-                <li><%= link_to "Log In", login_path %></li>
             <% end %>
         </ul>
     </div>
