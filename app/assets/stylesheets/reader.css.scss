@@ -74,7 +74,7 @@ body {
 	z-index: 1;
 }
 #logo{
-	margin-top: 60px;
+	margin-top: 10px;
 }
 #rightBackDrop {
 	position:fixed;
@@ -104,7 +104,7 @@ body {
 }
 #readerNavi {
     position:fixed;
-    top:75px;
+    top:25px;
 	left:0px;
     width:150px;
 	margin-left: -30px;
@@ -114,7 +114,6 @@ body {
 	}
 }
 #readerNavi ul {
-    margin-bottom:10px;
 	list-style-type: none;
 }
 #readerNavi ul li a {
@@ -145,7 +144,7 @@ h1{
 #subscribe {
 	position: fixed;
 	background-color: #455560;
-	top:5px;
+	top:10px;
 	left:130px;
 	padding-left: 3px;
 	padding-right: 3px;

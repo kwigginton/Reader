@@ -15,15 +15,7 @@ class ReaderController < ApplicationController
       next_feed = Feed.find(session[:unread_random].pop)
       
       @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
-      puts "---------you've already read--------------"
-      session[:read_random].each do |id|
-        puts "feed: #{id}"
-      end
-      puts "---------you've not yet read--------------"
-      session[:unread_random].each do |id|
-        puts "feed: #{id}"
-      end
-      
+
       return
     end
     
@@ -33,14 +25,7 @@ class ReaderController < ApplicationController
     session[:read_random] << session[:unread_random].last
     next_feed = Feed.find(session[:unread_random].pop)
     @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
-    puts "---------you've already read--------------"
-    session[:read_random].each do |id|
-      puts "feed: #{id}"
-    end
-    puts "---------you've not yet read--------------"
-    session[:unread_random].each do |id|
-      puts "feed: #{id}"
-    end
+
   end
   
   #ALL of this unnecessary database polling could be eliminated with an extra session variable, but for now I will leave it be.
@@ -157,12 +142,6 @@ class ReaderController < ApplicationController
     
     render :index
     
-    puts "-------HERE ARE YOUR VARIABLES-----"
-    puts "read_random"
-    puts session[:read_random]
-    puts "unread_random"
-    puts session[:unread_random]
-    puts "-----------------------------------"
   end
   
   

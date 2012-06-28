@@ -26,8 +26,11 @@
         </span>
         
         </br>
-        <div class="summary"><%= sanitize(entry.summary) %></div>
-        <div class="content"><%= sanitize(entry.content) %></div>
+        <% unless entry.content and not entry.content.empty? %>
+            <div class="summary"><%= sanitize(entry.summary) %></div>
+        <% else %>
+            <div class="content"><%= sanitize(entry.content) %></div>
+        <% end %>
         <hr style="height: 1px;">
     </div>
 <% end %>

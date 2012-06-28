@@ -12,9 +12,12 @@
             <h1><%= entry.title %></h1>
             <%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %>
             </br>
-            <div class="summary"><%= sanitize(entry.summary) %></div>
-            <div class="content"><%= sanitize(entry.content) %></div>
-            <div class="author">
+            <% unless entry.content and not entry.content.empty? %>
+                <div class="summary"><%= sanitize(entry.summary) %></div>
+            <% else %>
+                <div class="content"><%= sanitize(entry.content) %></div>
+            <% end %>
+
             <hr style="height: 1px;">
         </div>
     <% end %>
