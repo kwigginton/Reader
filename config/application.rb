@@ -59,7 +59,7 @@ module Reader
     # Heroku requires this to be false
     config.assets.initialize_on_precompile = false
     
-     config.assets.precompile << ['*.js', '*.css']
+    config.assets.precompile += %w[ *.css *.js]
     
   end
 end
