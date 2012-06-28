@@ -1,15 +1,20 @@
 source 'https://rubygems.org'
 
+ruby '1.9.2'
+
 gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem "heroku"
 
 group :development, :test do
     gem 'mysql2'
 end
 
 group :production do
+    gem 'thin'
     gem 'pg'
 end
 
