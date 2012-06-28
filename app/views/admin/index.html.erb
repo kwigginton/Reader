@@ -1,8 +1,13 @@
 <div class="content_pane"><h1>Welcome back <%= User.find(session[:user_id]).name%>!</h1>
 
-<p>Find me in app/views/admin/index.html.erb</p>
-<p>Reader has: <%= pluralize(@total_users, "user") %></p>
+<h1>Stat Reporting</h1>
+<fieldset><legend>onReader has:</legend>
+<%= pluralize(@total_users, "user") %>
+</br>
+<%= pluralize(@total_feeds, "feed") %>
+</br>
+<%= pluralize(@total_subscriptions, "subscription") %>
 <!-- probably a bad idea to query the entire user database on every admin login in the long run -->
-
+</fieldset>
 <%= button_to 'logout', logout_path, :method => :delete %>
 </div>

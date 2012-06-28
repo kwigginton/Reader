@@ -51,12 +51,42 @@ body{
 
 .header{
 	width: 100%;
+	height: 80px;
 	position: fixed;
 	top: 0px;
 	padding-top: 25px;
 	padding-bottom: 8px;
-	border-bottom: 1px solid gray;
-	text-align: -webkit-center;
+	border-bottom: 1px solid #455560;
+	font-size: 20px;
+}
+.topnav{
+	display: inline;
+	margin-left: 60px;
+
+	a{
+		text-decoration: none;
+	}
+	a:visited{
+		color: #94ABAC;
+	}
+	a:hover{
+		color: #F89728;
+	}
+}
+#logo{
+	margin-left: 50px;
+	padding-top: 30px;
+}
+
+.toplink{
+	padding: 10px;
+	font-family: Museo, Helvetica;
+	color: #94ABAC;
+
+}
+
+.slashdiv{
+	color: #455560;
 }
 
 .login{
@@ -64,7 +94,9 @@ body{
 	right: 40px;
 	top: 20px;
 	text-align: -webkit-center;
+	
 	a{
+		color: #455560;
 		text-decoration: underlined;
 	}
 	a:visited{
@@ -81,8 +113,8 @@ body{
 	height: 50%;
 	margin-left: 50px;
 	margin-right: 50px;
-	border-right: 1px black solid;
-	border-left: 1px black solid;
+	border-right: 1px #455560 solid;
+	border-left: 1px #455560 solid;
 	padding: 15px;
 }
 

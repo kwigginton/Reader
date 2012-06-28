@@ -65,12 +65,16 @@ body {
 
 #leftBackDrop {
 	position:fixed;
+	text-align: -webkit-center;
 	background-color: #455560;
 	left:0px;
 	width:130px;
 	height: 100%;
 	border-right: 2px solid black;
 	z-index: 1;
+}
+#logo{
+	margin-top: 60px;
 }
 #rightBackDrop {
 	position:fixed;
@@ -88,10 +92,11 @@ body {
 	text-align: -webkit-center;
 	z-index: 1;
 	a{
+		color: #94ABAC;
 		text-decoration: underline;
 	}
 	a:visited{
-		color: #DDD;
+		color: #94ABAC;
 	}
 	a:hover {
 		color: #F89728;

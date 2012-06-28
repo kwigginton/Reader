@@ -30,11 +30,13 @@
         <% end %>
     </div>
     <div id="leftBackDrop" class="shadow">
+        <%= link_to image_tag(src="oR_smallLight.png", :id => "logo", :alt => "onReader"), welcome_path %>
     </div>
     <div id="rightBackDrop">
     </div>
     <div class="login">
         <% if is_logged_in? %>
+            <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>
             <%= link_to raw("Manage</br>Subscriptions"), subscriptions_path %>
             </br>
             <%= link_to "Log Out", logout_path, :method => :delete %>
@@ -43,9 +45,6 @@
         <% end %>
     </div>
     <div id="readerNavi">
-        <ul>
-            <li id="home"><a href = <%= welcome_url %> title="Home">Home</a></li>
-        </ul>
         <ul>
             <% if session[:read_mode] == "random" %>
                 <li id="readSubscriptions"><%= link_to "Read Subscriptions", reader_subscriptions_path %></li>
