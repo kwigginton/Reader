@@ -13,12 +13,12 @@
     </div>
   <% end %>
 
-  <fieldset class="signup">
+  <fieldset class="details">
   <legend>Enter User Details</legend>
 
   <div>
     <%= f.label :name, '<b>Username</b>'.html_safe %>:
-    <%= f.text_field :name, size: 40 %>
+    <%= f.text_field :name, size: 20 %>
   </div>
   
   <div>
@@ -28,12 +28,12 @@
 
   <div>
     <%= f.label :password, '<b>Password</b>'.html_safe %>:
-    <%= f.password_field :password, size: 40 %>
+    <%= f.password_field :password, size: 20 %>
   </div>
 
   <div>
     <%= f.label :password_confirmation, '<b>Confirm</b>'.html_safe %>:
-    <%= f.password_field :password_confirmation, size: 40 %>
+    <%= f.password_field :password_confirmation, size: 20 %>
   </div>
 
   <div>
