@@ -59,7 +59,7 @@ module Reader
     # Heroku requires this to be false
     config.assets.initialize_on_precompile = false
     
-    config.assets.precompile += %w[ *.css *.js]
+    config.assets.precompile += %w[ *.css *.js *.scss *.coffee]
     
     config.serve_static_assets = false
     
