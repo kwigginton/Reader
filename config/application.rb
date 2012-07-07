@@ -61,5 +61,7 @@ module Reader
     
     config.assets.precompile += %w[ *.css *.js]
     
+    config.serve_static_assets = false
+    
   end
 end
