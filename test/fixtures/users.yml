@@ -1,11 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
+admin:
+  username: john
+  password_digest: <%= BCrypt::Password.create('doe') %> #password is doe
+  role: admin
+  email: jd@example.org
+  
 one:
-  name: MyString
-  password_digest: MyString
-  role: MyString
-
+  username: foo
+  password_digest: <%= BCrypt::Password.create('bar') %> #password is bar
+  role: reader
+  email: fb@example.org
+  
 two:
-  name: MyString
-  password_digest: MyString
-  role: MyString
+  username: James
+  password_digest: <%= BCrypt::Password.create('kirk') %> #password is kirk
+  role: reader
+  email: jtk@example.org
+
+three:
+  username: Captain
+  password_digest: <%= BCrypt::Password.create('Spock') %> #password is Spock
+  role: reader
+  email: cs@example.org

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  feed_url: MyString
-  title: MyString
-  author: MyString
+burnor:
+  feed_url: http://chrisburnor.com/posts.rss
+  title: Chris Burnor
+  author: 
 
-two:
-  feed_url: MyString
-  title: MyString
-  author: MyString
+google:
+  feed_url: http://feeds.feedburner.com/blogspot/MKuf
+  title: The Official Google Blog
+  author: A Googler

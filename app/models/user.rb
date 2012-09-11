@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  validates :name, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
   validates_format_of :email,:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   
   has_many :feeds, :through => :subscriptions, dependent: :destroy
@@ -41,4 +41,12 @@ class User < ActiveRecord::Base
     !!Subscription.find_by_user_id_and_feed_id(self[ :id ], Feed.find_by_feed_url(feed_url))
   end
     
+  # All usernames and emails will be stored lowercase to avoid issues with postgres or other annoying dbs.
+  def username=(value)
+    self[:username] = value && value.downcase
+  end
+  
+  def email=(value)
+    self[:email] = value && value.downcase
+  end
 end

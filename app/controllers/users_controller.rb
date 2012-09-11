@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
+    @users = User.order(:username)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -86,8 +86,8 @@ class UsersController < ApplicationController
   
   private
   
-  def post_signup(name, password)
-    user = User.find_by_name(name)
+  def post_signup(username, password)
+    user = User.find_by_username(username)
     if user and user.authenticate(password)
       session[:user_id] = user.id
       
