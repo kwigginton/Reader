@@ -1,9 +1,11 @@
 class Feed < ActiveRecord::Base
-  
-  validates :feed_url, uniqueness: true, presence: true
+  attr_accessible :feed_url, :title, :author, :feed_data
+  validates :feed_url, :uniqueness => true, :presence => true
   
   has_many :subscriptions
   has_many :users, :through => :subscriptions
+  
+  serialize :feed_data
   
 #  def ensure_not_referenced_by_any_subscription
 #    if subscriptions.empty?

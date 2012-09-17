@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def current_user
     User.find(session[:user_id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to welcome_url, notice: "You must log in to access user actions"
+    redirect_to welcome_url, :notice => "You must log in to access user actions"
   end
   
   protected
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def authorize_admin
     unless User.is_admin(session[:user_id])
       session[:return_to] = request.url
-      redirect_to login_url, notice: "Please log in."
+      redirect_to login_url, :notice => "Please log in."
     end
   end
   
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def authorize_reader
     unless User.is_reader(session[:user_id]) || User.is_admin(session[:user_id])
       session[:return_to] = request.url
-      redirect_to login_url, notice: "Please log in"
+      redirect_to login_url, :notice => "Please log in"
     end
   end
 end

@@ -18,30 +18,30 @@ class SubscriptionsControllerTest < ActionController::TestCase
 
   test "should create subscription" do
     assert_difference('Subscription.count') do
-      post :create, subscription: @subscription.attributes
+      post :create, :subscription => { :feed_id => @subscription.feed_id, :user_id => @subscription.user_id }
     end
 
     assert_redirected_to subscription_path(assigns(:subscription))
   end
 
   test "should show subscription" do
-    get :show, id: @subscription
+    get :show, :id => @subscription
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @subscription
+    get :edit, :id => @subscription
     assert_response :success
   end
 
   test "should update subscription" do
-    put :update, id: @subscription, subscription: @subscription.attributes
+    put :update, :id => @subscription, :subscription => { :feed_id => @subscription.feed_id, :user_id => @subscription.user_id }
     assert_redirected_to subscription_path(assigns(:subscription))
   end
 
   test "should destroy subscription" do
     assert_difference('Subscription.count', -1) do
-      delete :destroy, id: @subscription
+      delete :destroy, :id => @subscription
     end
 
     assert_redirected_to subscriptions_path

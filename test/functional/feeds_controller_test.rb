@@ -18,30 +18,30 @@ class FeedsControllerTest < ActionController::TestCase
 
   test "should create feed" do
     assert_difference('Feed.count') do
-      post :create, feed: @feed.attributes
+      post :create, :feed => { :author => @feed.author, :feed_data => @feed.feed_data, :feed_url => @feed.feed_url, :title => @feed.title }
     end
 
     assert_redirected_to feed_path(assigns(:feed))
   end
 
   test "should show feed" do
-    get :show, id: @feed
+    get :show, :id => @feed
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @feed
+    get :edit, :id => @feed
     assert_response :success
   end
 
   test "should update feed" do
-    put :update, id: @feed, feed: @feed.attributes
+    put :update, :id => @feed, :feed => { :author => @feed.author, :feed_data => @feed.feed_data, :feed_url => @feed.feed_url, :title => @feed.title }
     assert_redirected_to feed_path(assigns(:feed))
   end
 
   test "should destroy feed" do
     assert_difference('Feed.count', -1) do
-      delete :destroy, id: @feed
+      delete :destroy, :id => @feed
     end
 
     assert_redirected_to feeds_path

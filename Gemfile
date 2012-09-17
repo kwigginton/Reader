@@ -1,23 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '1.9.2'
-
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "heroku"
+gem 'pg'
 
-group :development, :test do
-    gem 'mysql2'
-end
-
-group :production do
-    gem 'thin'
-    gem 'pg'
-end
-
+gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,7 +16,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
+  # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -34,19 +24,19 @@ end
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the web server
+# Use unicorn as the app server
 # gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'ruby-debug'
 
-# To use feedzirra as RSS reader
+# Use feedzirra for parsing feeds
 gem 'feedzirra'
