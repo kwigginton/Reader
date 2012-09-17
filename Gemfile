@@ -5,7 +5,13 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# Use PostgreSQL to appease the heroku gods
 gem 'pg'
+
+# Use Thin
+gem 'thin'
+
+
 
 gem 'json'
 
