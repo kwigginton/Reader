@@ -46,7 +46,8 @@ class FeedsController < ApplicationController
     @feed.title = feed.title
     @feed.author = feed.entries.first.author
     @feed.feed_url = feed.feed_url
-
+    @feed.feed_data = feed
+    
     respond_to do |format|
       if @feed.save
         format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }

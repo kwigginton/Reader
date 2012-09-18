@@ -14,7 +14,7 @@ class ReaderController < ApplicationController
       session[:read_random] << session[:unread_random].last
       next_feed = Feed.find(session[:unread_random].pop)
       
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
 
       return
     end
@@ -24,7 +24,7 @@ class ReaderController < ApplicationController
     session[:unread_random].shuffle
     session[:read_random] << session[:unread_random].last
     next_feed = Feed.find(session[:unread_random].pop)
-    @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+    @feed = next_feed.feed_data
 
   end
   
@@ -40,7 +40,7 @@ class ReaderController < ApplicationController
       session[:read_subscriptions] << session[:unread_subscriptions].last
       next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
       
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
       
       return
     end
@@ -50,7 +50,7 @@ class ReaderController < ApplicationController
       session[:unread_subscriptions].shuffle
       session[:read_subscriptions] << session[:unread_subscriptions].last
       next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
       return
     else
       #TODO send feed object with one entry and title that states no subscriptions active.
@@ -64,7 +64,7 @@ class ReaderController < ApplicationController
       
       session[:read_subscriptions] << session[:unread_subscriptions].last
       next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     else
       
       session[:read_subscriptions] = []
@@ -72,7 +72,7 @@ class ReaderController < ApplicationController
       session[:unread_subscriptions].shuffle
       session[:read_subscriptions] << session[:unread_subscriptions].last
       next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     end
     
     @subscription = Subscription.find(session[:read_subscriptions].last)
@@ -86,7 +86,7 @@ class ReaderController < ApplicationController
       
       session[:unread_subscriptions] << session[:read_subscriptions].pop
       next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].last).feed_id)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     else
       
       session[:unread_subscriptions] = []
@@ -94,7 +94,7 @@ class ReaderController < ApplicationController
       session[:unread_subscriptions].shuffle
       session[:read_subscriptions] << session[:unread_subscriptions].last
       next_feed = Feed.find(Subscription.find(session[:unread_subscriptions].pop).feed_id)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     end
     
     render :index
@@ -108,7 +108,7 @@ class ReaderController < ApplicationController
       #Load the next unread feed and parse to view.
       session[:read_random] << session[:unread_random].last
       next_feed = Feed.find(session[:unread_random].pop)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     else
       #if user is just starting reading, init vars and fill with all feed ids in random order.
       session[:read_random] = []
@@ -116,7 +116,7 @@ class ReaderController < ApplicationController
       session[:unread_random].shuffle
       session[:read_random] << session[:unread_random].last
       next_feed = Feed.find(session[:unread_random].pop)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     end
     
     render :index
@@ -129,7 +129,7 @@ class ReaderController < ApplicationController
       
       session[:unread_random] << session[:read_random].pop
       next_feed = Feed.find(session[:read_random].last)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     else
       
       session[:read_random] = []
@@ -137,7 +137,7 @@ class ReaderController < ApplicationController
       session[:unread_random].shuffle
       session[:read_random] << session[:unread_random].last
       next_feed = Feed.find(session[:unread_random].pop)
-      @feed = Feedzirra::Feed.fetch_and_parse(next_feed.feed_url)
+      @feed = next_feed.feed_data
     end
     
     render :index
