@@ -44,7 +44,7 @@ class FeedsController < ApplicationController
     #TODO enqueue created feed for next view
     @feed = Feed.new(params[:feed])
     feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
-    if(feed)
+    if(feed && !(feed.is_a? Fixnum))
       @feed.title = feed.title
       @feed.author = feed.entries.first.author
       @feed.feed_url = feed.feed_url
