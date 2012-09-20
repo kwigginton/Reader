@@ -10,6 +10,9 @@ Reader::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
+  
+  # Compile assets including all *.js and *.css
+  config.assets.precompile += %w( *.js *.css  )
 
   # Log error messages when you accidentally call methods on nil
   config.whiny_nils = true

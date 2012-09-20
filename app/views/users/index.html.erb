@@ -1,9 +1,9 @@
-<div class="content_pane">
+
     <h1>Listing users</h1>
 	<% if notice %>
 	<p id="notice"><%= notice %></p>
 	<% end %>
-<table>
+<table class="neat">
   <tr>
     <th>Name</th>
     <th>Password digest</th>
@@ -28,4 +28,3 @@
 <br />
 
 <%= link_to 'New User', new_user_path %>
-</div>

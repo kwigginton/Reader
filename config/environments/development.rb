@@ -31,6 +31,9 @@ Reader::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+  
+  # Compile assets including all *.js and *.css
+  config.assets.precompile += %w( *.js *.css  )
 
   # Expands the lines which load the assets
   config.assets.debug = true

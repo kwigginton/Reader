@@ -21,9 +21,9 @@
                 <%= link_to 'ABOUT', {:controller => :static_pages, :action => :about}, :class => 'toplink' %>
             </div>
         </div>
-        
+        <div class="content_pane">
         <%= yield %>
-        
+        </div>
     <div class="login">
         <% if is_logged_in? %>
             <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>

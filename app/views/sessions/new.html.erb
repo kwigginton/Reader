@@ -1,11 +1,11 @@
-<div class="content_pane">
+
   <% if flash[:alert] %>
     <p id="notice"><%= flash[:alert] %></p>
   <% end %>
 
   <%= form_tag do %>
     <fieldset>
-      <legend>Please Log In</legend>
+      <legend><b>Please Log In</b></legend>
 
       <div>
         <%= label_tag :username, 'Username:' %>
@@ -26,4 +26,3 @@
         <%= link_to "Sign up!", signup_path%>
     </div>
   <% end %>
-</div>

@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   
+  after_initialize :init
+  
   attr_accessible :username, :password, :password_confirmation, :role, :email
   
-  validates :username, :presence => true, :uniqueness => true
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates :username, presence: true, uniqueness: { message: " is already taken" }
+  validates :email, presence: true, format: { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
   
   has_many :feeds, :through => :subscriptions, :dependent => :destroy
   
