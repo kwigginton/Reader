@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         
-        format.html { post_signup(@user.name, @user.password) }
+        format.html { post_signup(@user.username, @user.password) }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to users_url, notice: 'User #{@user.name} was successfully updated with role: #{@user.role}' }
+        format.html { redirect_to users_url, notice: 'User #{@user.username} was successfully updated with role: #{@user.role}' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
