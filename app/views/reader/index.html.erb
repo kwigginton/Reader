@@ -21,7 +21,7 @@
         <h1><%= entry.title %></h1>
         
         <span class="byline">
-            <%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %>
+		<% if entry.published%><%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %> <% end %>
             <% if entry.author %> by <%= sanitize(entry.author) %> <% end %>
         </span>
         

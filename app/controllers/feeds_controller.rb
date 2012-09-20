@@ -41,13 +41,15 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
+    #TODO enqueue created feed for next view
     @feed = Feed.new(params[:feed])
     feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
-    @feed.title = feed.title
-    @feed.author = feed.entries.first.author
-    @feed.feed_url = feed.feed_url
-    @feed.feed_data = feed
-    
+    if(feed)
+      @feed.title = feed.title
+      @feed.author = feed.entries.first.author
+      @feed.feed_url = feed.feed_url
+      @feed.feed_data = feed
+    end
     respond_to do |format|
       if @feed.save
         format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
