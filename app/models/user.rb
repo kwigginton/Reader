@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   
   has_secure_password
   
+  def init
+    self.role ||= 'reader'
+  end
+  
   def self.admin
     'admin'
   end
