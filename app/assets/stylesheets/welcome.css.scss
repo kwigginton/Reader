@@ -15,12 +15,14 @@
 body{
 	margin: 0;
 	font-family: Museo, sans-serif;
+	width: 100%;
 }
 .login{
 	position: fixed;
 	right: 40px;
 	top: 20px;
 	text-align: -webkit-center;
+	text-align: center;
 	a{
 		text-decoration: underline;
 	}
@@ -35,6 +37,7 @@ body{
 	position: fixed;
 	width: 100%;
 	text-align: -webkit-center;
+	text-align: center;
 	color: #455560;
 	#logo {
 		margin-top: 250px;
@@ -42,6 +45,7 @@ body{
 	
 	.center {
 		width: 700px;
+		margin:0px auto;
 	}
 	.button_bar {
 		padding-top: 13px;
@@ -62,6 +66,8 @@ body{
 		-webkit-border-radius: 8px;
 		-moz-box-shadow: 0 1px 3px #666;
 		-webkit-box-shadow: 0 1px 3px #666;
+		border-radius: 9px;
+		box-shadow: 0 1px 3px #666;
 		position: relative;
 		cursor: pointer;
 		width: 100px;
