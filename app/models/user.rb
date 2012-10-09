@@ -2,10 +2,9 @@ class User < ActiveRecord::Base
   
   after_initialize :init
   
-  attr_accessible :username, :password, :password_confirmation, :role, :email
-  
-  validates :username, presence: true, uniqueness: { message: " is already taken" }
-  validates :email, presence: true, format: { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+  attr_accessible :password, :password_confirmation, :role, :email
+
+  validates :email, presence: true, format: { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }, uniqueness: {message: " is already in use."}
   
   has_many :feeds, :through => :subscriptions, :dependent => :destroy
   
@@ -50,11 +49,8 @@ class User < ActiveRecord::Base
   end
     
   # All usernames and emails will be stored lowercase to avoid issues with postgres or other annoying dbs.
-  def username=(value)
-    self[:username] = value && value.downcase
-  end
-  
   def email=(value)
     self[:email] = value && value.downcase
   end
+  
 end

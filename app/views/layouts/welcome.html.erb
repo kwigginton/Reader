@@ -8,25 +8,52 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body>
+<body class="hero-section" style="display: block;">
+	<div class="header-wrapper">
+		<header class="main-header">
+			<nav class="header-nav">
+				<span class="home-link">
+					<%= image_tag(src="oR_top.png", :id => "logo", :alt => "onReader")%>
+				</span>
+				<div class="actions">
+				    <% if is_logged_in? %>
+				        <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>
+				        <%= link_to "Manage Subscriptions", subscriptions_path %>
+				        </br>
+				        <%= link_to "Sign Out", logout_path, :method => :delete, :class => 'button signin-button' %>
+				    <% else %>
+				        <%= link_to "Sign In", login_path, :class => 'button signin-button' %>
+				    <% end %>
+				</div>
+				<ul class="top-nav nav-list">
+				    <li class="nav-item">
+						<a class='nav-link' href="reader">
+							<strong>Read</strong>
+							<%= image_tag src="read-icon.png", :alt => 'read', :class => 'nav-icon read-icon' %>
+							
+							<span class="tagline">Enjoy the web's best.</span>
+						</a>
+					</li>
+				    <li class="nav-item">
+						<a class='nav-link' href="explore">
+							<%= image_tag src="explore-icon.png", :alt => 'explore', :class => 'nav-icon explore-icon'%>
+							<strong>Explore</strong>
+							<span class="tagline">Discover new content.</span>
+						</a>
+					</li>
+				    <li class="nav-item">
+					<a class='nav-link' href="about">
+						<%= image_tag src="about-icon.png", :alt => 'about', :class => 'nav-icon about-icon'%>
+						<strong>About</strong>
+						<span class="tagline">What we do here.</span>
+					</a></li>
+				</ul>
+		</header>
+	</div>
+	<div class="content">
 
-    <div class="splash">
-        <div class="center">
-            <%= link_to image_tag(src="oR_splash.png", :id => "logo", :alt => "onReader"), reader_path %>
-            <%= yield %>
-        </div>
-    </div>
-    <div class="login">
-        <% if is_logged_in? %>
-            <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>
-            <%= link_to "Manage Subscriptions", subscriptions_path %>
-            </br>
-            <%= link_to "Log Out", logout_path, :method => :delete %>
-        <% else %>
-            <%= link_to "Log In", login_path %>
-        <% end %>
-    </div>
+		<%= yield %>
 
-
+	</div>
 </body>
 </html>

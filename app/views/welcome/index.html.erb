@@ -1,8 +1,13 @@
-<div class="description">
-    the best things to read are at your fingertips
-</div>
-<div class="button_bar">
-    <%= link_to 'READ', {:controller => :reader, :action => :index}, :class => 'button read' %>
-    <%= link_to 'EXPLORE', {:controller => :explore, :action => :index}, :class => 'button explore' %>
-    <%= link_to 'ABOUT', {:controller => :static_pages, :action => :about}, :class => 'button about' %>
+<div class="view">
+	<div class="underlay">
+		<div class="get-started">
+			<h1 class="headline">Join the easiest way to read about your favorite things.</h1>
+			<%= form_for(@user) do |f| %>
+				<%= f.text_field :email, :class => "user-email", :placeholder => "Email address", :onblur => "if (this.placeholder =='') this.placeholder='Email address';".html_safe%>
+				<%= f.password_field :password, :class => "password", :placeholder => "Password", :onblur => "if (this.placeholder =='') this.placeholder='Password';".html_safe%>
+				<%= f.password_field :password_confirmation, :class => "password-confirm", :placeholder => "Confirm Password", :onblur => "if (this.placeholder =='') this.placeholder='Confirm Password';".html_safe %>
+				<%= f.submit "Start Reading", :class => 'button start' %>
+			<% end %>
+		</div>
+	</div>
 </div>
