@@ -1,5 +1,6 @@
-<% if session[:read_mode] == 'subscriptions' %>
-	$('#subscribe').html("<%=j link_to 'Subscribe', subscriptions_path( feed_id: Subscription.find(session[:read_subscriptions].last).feed_id), method: :post , remote: :true %>");
+<% #The views for these JS files are in logically reverse order since they render after the action is taken.
+if session[:read_mode] == :subscription %>
+	$('#subscribe').html("<%=j link_to 'Subscribe', subscriptions_path( id: session[:subscription_current]), method: :post , remote: :true %>");
 <% else %>
-	$('#subscribe').html("<%=j link_to 'Subscribe', subscriptions_path( feed_id: session[:read_random].last), method: :post , remote: :true %>");
+	$('#subscribe').html("<%=j link_to 'Subscribe', subscriptions_path( id: session[:random_current]), method: :post , remote: :true %>");
 <% end %>

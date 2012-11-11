@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :authorize_reader, :authorize_admin
   
   def new
+    @user = User.new
   end
 
   def create
@@ -17,7 +18,7 @@ class SessionsController < ApplicationController
         redirect_to eval("#{user.role}_url")
         
       else
-        redirect_to login_url, :alert => "Invalid user/password combination"
+        redirect_to login_url, :alert => "Invalid Email or Password"
       end
     end
 

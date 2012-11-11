@@ -1,11 +1,3 @@
-<div id="subscribe" class="shadow">
-<% if not session[:read_subscriptions].empty?
-    
-    # !!! A user should not be displayed a feed he is not subscribed to while in subscriptions view %>
-    
-        <%= link_to 'Unsubscribe', subscription_path(session[:read_subscriptions].last), :method => :delete, remote: true %>
-<% end %>
-</div>
 <% if @feed %>
     <% @feed.entries.each do |entry| %>
         <div class="entry">
@@ -15,7 +7,7 @@
             <% unless entry.content and not entry.content.empty? %>
                 <div class="summary"><%= sanitize(entry.summary) %></div>
             <% else %>
-                <div class="content"><%= sanitize(entry.content) %></div>
+                <div class="reader-content"><%= sanitize(entry.content) %></div>
             <% end %>
 
             <hr style="height: 1px;">

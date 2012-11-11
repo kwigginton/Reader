@@ -43,14 +43,14 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new
     @subscription.user = current_user
-    @subscription.feed = Feed.find(params[:feed_id])
+    @subscription.feed = Feed.find(params[:id])
     
     respond_to do |format|
       if @subscription.save
         
         #since user was on the feed they wanted to subscribe to, they have already read it
-        if session[:read_subscriptions]
-          session[:read_subscriptions] << @subscription.id
+        if session[:subscription_feeds]
+          session[:subscription_feeds] << @subscription.id
         end
         
         format.html { redirect_to request.referer }
@@ -87,18 +87,19 @@ class SubscriptionsController < ApplicationController
    # if params[:feed_id]
   #    @subscription = Subscription.find_by_user_id_and_feed_id(session[:user_id], params[:feed_id])
   #  else
-      @subscription = Subscription.find(params[:id])
+      @subscription = Subscription.find_by_feed_id_and_user_id(params[:id], session[:user_id])
+      puts "Here's the subscription------"
+      puts @subscription
   #  end
     
     #Remove unwanted feed from session tracking
-    if session[:read_subscriptions]
-      session[:read_subscriptions].delete @subscription.id
+    if session[:subscription_feeds]
+      session[:subscription_feeds].delete @subscription.id
     end
-      
-      
+    
+    
     @subscription.destroy
     
-
     
     respond_to do |format|
       format.html { redirect_to request.referer }

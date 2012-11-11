@@ -23,61 +23,48 @@
       });
   </script>
 </head>
-<body>
-    <div class="top_bar shadow">
-        <% if @feed and not @feed.is_a? Fixnum%>
-            <%= @feed.title %>
-        <% end %>
-    </div>
-    <div id="leftBackDrop" class="shadow">
-        <%= link_to image_tag(src="oR_smallLight.png", :id => "logo", :alt => "onReader"), welcome_path %>
-    </div>
-    <div id="rightBackDrop">
-    </div>
-    <div class="login">
-        <% if is_logged_in? %>
-            <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>
-            <%= link_to raw("Manage</br>Subscriptions"), subscriptions_path %>
-            </br>
-            <%= link_to "Log Out", logout_path, :method => :delete %>
-        <% else %>
-            <%= link_to "Log In", login_path %>
-        <% end %>
-    </div>
-    <div id="readerNavi">
-        <ul>
-            <% if session[:read_mode] == "random" %>
-                <li id="readSubscriptions"><%= link_to "Read Subscriptions", reader_subscriptions_path %></li>
-            <% else %>
-                <li id="randomize"><%= link_to "Randomize!", reader_path %>
-            <% end %>
-        </ul>
-        <ul>
-            <li id="explore"><%= link_to "Explore", explore_path %></li>
-            <li id="addFeed"><%= link_to "Add a feed", new_feed_path %></li>
-        </ul>
-        <ul>
-            <!-- next/previous logic block -->
-            <% unless session[:read_mode] == "subscriptions" %>
-                <li id="next"><%= link_to "Next", reader_next_random_path %></li>
-                <% unless session[:read_random].size == 1 %>
-                    <li id="previous"><%= link_to "Previous", reader_previous_random_path %></li>
-                <% end %>
-            <% else %>
-                <% unless session[:unread_subscriptions].empty? %>
-                    <li id="next"><%= link_to "Next", reader_next_subscription_path %></li>
-                <% end %>
-                <% unless session[:read_subscriptions].size <= 1 %>
-                    <li id="previous"><%= link_to "Previous", reader_previous_subscription_path %></li>
-                <% end %>
-            <% end %>
-        </ul>
-    </div>
+<body class="hero-section">
+	<div class="header-wrapper">
+		<header class="main-header">
+			<nav class="header-nav">
+				<%= link_to content_tag(:span, image_tag("oR_small.png", id: "reader-logo", alt: "onReader"), class: "home-link"), welcome_url %>
+					
+				<div id="subscribe" class="shadow">
+				<% if session[:read_mode] == :subscription || session[:read_mode] == :random
+				    #Hard link to log in/ sign up if guest tries to subscribe.
+				    #super future TODO associate subscriptions to Visitor IPs so they don't need to sign up, but limit it to some low number.
+				    if is_logged_in?
+				        unless is_subscribed?(session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]) %>
+				          <%= link_to 'Subscribe', subscriptions_path( :id => (session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current])), :method => :post, :remote => :true%>
+						<% else %>
+				            <%= link_to 'Unsubscribe', subscription_path( :id => (session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current])), :method => :delete, :remote => true %>
+				    	<% end 
+					else %>
+						<%= link_to 'Subscribe', login_path %>
 
-    <div class="content_pane">
-        <%= yield %>
-    </div>
-
-
+				    <%  end
+				    end %>
+				</div>
+			</nav>
+		</header>
+	</div>
+	
+	<div class="content">
+		<nav>
+			<% if session[:read_mode] == :random  %>
+				<%= link_to '', reader_next_random_path, html_options = {:class => "flow flow-right", :alt => "next"}%>
+				<%= link_to '', reader_previous_random_path, html_options = {:class => "flow flow-left", :alt => "previous"} %>
+			<% else %>
+				<%= link_to '', reader_next_subscription_path, html_options = {:class => "flow flow-right", :alt => "next"} %>
+				<%= link_to '', reader_previous_subscription_path, html_options = {:class => "flow flow-left", :alt => "previous"} %>
+			<% end %>
+		</nav>
+		<div class="view">
+			<header class="centered-element blog-title"><h1><%= @feed.title %></h1></header>
+			<div class="underlay">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

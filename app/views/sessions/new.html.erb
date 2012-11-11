@@ -1,28 +1,32 @@
-
+<div class="login-pane">
   <% if flash[:alert] %>
     <p id="notice"><%= flash[:alert] %></p>
   <% end %>
 
   <%= form_tag do %>
     <fieldset>
-      <legend><b>Please Log In</b></legend>
+      <legend><b>Sign in here</b></legend>
 
       <div>
-        <%= label_tag :email, 'Email:' %>
-        <%= text_field_tag :email, params[:email] %>
+        <%= text_field_tag :email, params[:email], placeholder: 'Email' %>
       </div>
 
       <div>
-        <%= label_tag :password, 'Password:' %>
-        <%= password_field_tag :password, params[:password] %>
+        <%= password_field_tag :password, params[:password], placeholder: 'Password' %>
       </div>
   
       <div>
-        <%= submit_tag "Login" %>
+        <%= submit_tag "Login" , :class => 'button join-field login-button'%>
       </div>
     </fieldset>
-    <div id="signup">
-        Don't have an account?
-        <%= link_to "Sign up!", signup_path%>
-    </div>
   <% end %>
+</div>
+<div class="signup-pane">
+	<legend><b>Or join here</b></legend>
+	<%= form_for(@user) do |f| %>
+		<%= f.text_field :email, :class => "user-email", :placeholder => "Email address", :onblur => "if (this.placeholder =='') this.placeholder='Email address';".html_safe%>
+		<%= f.password_field :password, :class => "password", :placeholder => "Password", :onblur => "if (this.placeholder =='') this.placeholder='Password';".html_safe%>
+		<%= f.password_field :password_confirmation, :class => "password-confirm", :placeholder => "Confirm Password", :onblur => "if (this.placeholder =='') this.placeholder='Confirm Password';".html_safe %>
+		<%= f.submit "Start Reading", :class => 'button start' %>
+	<% end %>
+</div>

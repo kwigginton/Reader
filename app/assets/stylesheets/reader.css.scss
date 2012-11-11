@@ -20,24 +20,111 @@
 	font-family: Cassia;
 	src: url('/assets/CassiaXLig.otf');
 }
-body {
-	margin:0;
-    color: black;
-    font-family: Museo, Cassia, sans-serif;
+body{
+	background-color: #455560;
+	display: block;
 }
-.content_pane {
-	width:80%;
-	position:absolute;
-	margin-top: 50px;
-	margin-left:150px;
-	margin-right:120px;
-	padding: 10px;
-	-webkit-background-clip: padding-box;
-	background-clip: padding-box;
-	.entry{
-		padding-right: 120px;
-		font-family: Cassia;
-	}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    font-family: Museo, Cassia, sans-serif;
+    font-style: inherit;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size-adjust: inherit;
+    font-stretch: inherit;
+    -moz-font-feature-settings: inherit;
+    -moz-font-language-override: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+    display: block;
+}
+
+.main-header .actions, .main-header .top-nav {
+    position: absolute;
+    top: 0px;
+    height: 100px;
+}
+.centered-element, .header-nav, .nav-drawer .drawer-content, .footer-nav, .main-content, .aside-content {
+    width: 1070px;
+    margin: 0px auto;
+}
+.header-wrapper {
+    position: relative;
+}
+.main-header{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	border-bottom: 1px solid #ffffff;
+	background-color: #ffffff;
+	min-width: 1020px;
+	height: 50px;
+	z-index: 100;
+}
+.main-header .home-link{
+	position: absolute;
+    top: 0px;
+	height: 40px;
+	left: 0px;
+	display: block;
+	width: 190px;
+	padding: 10px 0px 0px 30px;
+}
+.main-header a.home-link, .main-header a.nav-link {
+    background: none repeat scroll 0% 0% transparent;
+}
+.main-header .actions{
+	right: 1px;
+	z-index: 1;
+	width: 100px;
+	padding: 15px 50px 0px 80px;
+	height: 35px;
+}
+
+.header-nav{
+	position: relative;
+	width: 1070px;
+}
+.content{
+	width: 1070px;
+	margin: 0px auto;
+	color: rgb(0, 0, 0);
+	overflow: hidden;
+	min-width: 1020px;
+	border-bottom: 1px solid rgb(255, 255, 255);
+	box-shadow: 10px 0 20px  -4px #222 , -10px 0 20px  -4px #222;
+	-moz-box-shadow: 10px 0 20px  -4px #222, -10px 0 20px  -4px #222;
+	-webkit-box-shadow: 10px 0 20px  -4px #222, -10px 0 20px  -4px #222;
+}
+.view {
+	position: relative;
+	width: 1070px;
+	overflow: hidden;
+}
+.underlay{
+	position: relative;
+	width: 1070px;
+	height: 100%;
+	top: 50px;
+	overflow: hidden;
+	background: rgb(200,200,200);
+	padding: 20px 0px 0px;
+}
+
+.blog-title{
+	top: 50px;
+	background-color: white;
+	position: relative;
+	text-decoration: none;
+	text-align: center;
 }
 .notice {
 	position: absolute;
@@ -102,36 +189,8 @@ body {
 		color: #F89728;
 	}
 }
-#readerNavi {
-    position:fixed;
-    top:40px;
-	left:0px;
-    width:150px;
-	margin-left: -30px;
-	z-index: 1;
-	#readSubscriptions {
-		font-size: 13px;
-	}
-}
-#readerNavi ul {
-	list-style-type: none;
-}
-#readerNavi ul li a {
-    display: block;
-    border:1px solid #999;
-    background-color:#222;
-    border-left:6px solid #999;
-    text-decoration:none;
-    color:white;
-    padding:0px 0px 0px 10px;
-}
-#readerNavi ul li a:hover {
-	background-color: #f89728;
-	color: black;
-}
-
-#explore {
-	text-decoration: line-through;
+.entry{
+	padding: 20px;
 }
 h1{
 	font-family: Museo, Helvetica;
@@ -140,42 +199,68 @@ h1{
 	-webkit-margin-after: -.10em;
 	text-decoration:underline;
 }
+.reader-content{
+	font-family: Cassia;
+}
 
 #subscribe {
-	position: fixed;
+	position: absolute;
+	border-radius: 0px 0px 5px 5px;
 	background-color: #455560;
-	top:10px;
-	left:130px;
+	top:50px;
+	right:50px;
 	padding-left: 3px;
 	padding-right: 3px;
-	border-right: 2px solid black;
-	border-bottom: 2px solid black;
-	border-top: 2px solid black;
-	color: white;
+	border: 1px solid #ccc;
+	color: #FFF;
 	z-index: 4;
-	
 	
 	a{
 		text-decoration: none;
-		color: white;
+		color: #FFF;
 	}
 	a:visited{
-		color: white;
+		color: #FFF;
 		text-decoration: none;
 	}
 	a:hover {
 		color: #ccc;
 	}
 }
+.flow{
+	z-index: 1;
+	position: fixed;
+	margin-top: 350px;
+	width: 75px;
+	height: 65px;
+	opacity: 0.7;
+	transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
+}
+.flow:hover{
+	opacity: 1.0;
+    transition: opacity .5s ease-in-out;
+    -moz-transition: opacity .5s ease-in-out;
+    -webkit-transition: opacity .5s ease-in-out;
+}
+.flow-left{
+	background: image_url("flow-left.png") no-repeat;
+	left: 25px;
+}
+.flow-right{
+	background: image_url("flow-right.png") no-repeat;
+	right: 25px;
+}
 .shadow {
 	/* For all other browsers */
-	-moz-box-shadow: 3px 3px 4px #666;
-	-webkit-box-shadow: 3px 3px 4px #666;
-	box-shadow: 3px 3px 4px #666;
+	-moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2), -1px 1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2), -1px 1px 2px rgba(0,0,0,0.2);
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.2), -1px 1px 2px rgba(0,0,0,0.2);
 	/* For IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666')";
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#666666')";
 	/* For IE 5.5 - 7 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666');
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#666666');
 }
 .byline {
 	font-family: Museo;

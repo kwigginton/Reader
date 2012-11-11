@@ -17,33 +17,35 @@
 				</span>
 				<div class="actions">
 				    <% if is_logged_in? %>
-				        <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>
-				        <%= link_to "Manage Subscriptions", subscriptions_path %>
-				        </br>
 				        <%= link_to "Sign Out", logout_path, :method => :delete, :class => 'button signin-button' %>
+					<% if is_admin? %><%= link_to "Admin", admin_path %><% end %>
 				    <% else %>
 				        <%= link_to "Sign In", login_path, :class => 'button signin-button' %>
 				    <% end %>
+				
 				</div>
 				<ul class="top-nav nav-list">
 				    <li class="nav-item">
 						<a class='nav-link' href="reader">
-							<strong>Read</strong>
-							<%= image_tag src="read-icon.png", :alt => 'read', :class => 'nav-icon read-icon' %>
+							<i class='read-icon'></i>
 							
+							<strong>Read</strong>
 							<span class="tagline">Enjoy the web's best.</span>
 						</a>
 					</li>
 				    <li class="nav-item">
 						<a class='nav-link' href="explore">
-							<%= image_tag src="explore-icon.png", :alt => 'explore', :class => 'nav-icon explore-icon'%>
+							<i class='explore-icon'></i>
 							<strong>Explore</strong>
 							<span class="tagline">Discover new content.</span>
 						</a>
 					</li>
 				    <li class="nav-item">
 					<a class='nav-link' href="about">
-						<%= image_tag src="about-icon.png", :alt => 'about', :class => 'nav-icon about-icon'%>
+						<i class='about-icon'></i>
+						
+						
+						
 						<strong>About</strong>
 						<span class="tagline">What we do here.</span>
 					</a></li>
@@ -51,9 +53,14 @@
 		</header>
 	</div>
 	<div class="content">
-
-		<%= yield %>
-
+		<div class="view">
+			<div class="underlay">
+				<%= yield %>
+			</div>
+		</div>
+		<div class="footer-nav">
+			<p class="copyright">© 2012 onReader. All rights reserved.</p>
+		</div>
 	</div>
 </body>
 </html>

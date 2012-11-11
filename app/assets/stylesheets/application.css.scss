@@ -1,15 +1,8 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- */
+// Place all the styles related to the Welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 @font-face{
 	font-family: Museo;
 	src: url('/assets/MuseoSans_300.otf');
@@ -19,118 +12,383 @@
 	font-weight: bold;
 	src: url('/assets/MuseoSans_700.otf');
 }
-@font-face{
-	font-family: Museo;
-	font-style: italic;
-	src: url('MuseoSans_300_Italic.otf');
-}
-@font-face{
-	font-family: Cassia;
-	src: url('/assets/CassiaXLig.otf');
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    font-family: Museo, sans-serif;
+    font-style: inherit;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size-adjust: inherit;
+    font-stretch: inherit;
+    -moz-font-feature-settings: inherit;
+    -moz-font-language-override: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
 }
 body{
-	font-family: Cassia, sans-serif;
-	margin: 0;
-	
-	h1{
-		font-family: Museo, Helvetica;
-		font-weight: bold;
-		padding-left: 20px;
-	}
+	height: 100%;
 }
-
-#notice{
-	color: red;
-	position: absolute;
-	left: 30px;
-	border: 1px solid red;
-	padding: 5px;
-	top: 30px;
-	background-color: black;
-}
-
-.header{
-	width: 100%;
-	height: 80px;
-	position: fixed;
-	top: 0px;
-	padding-top: 25px;
-	padding-bottom: 8px;
-	border-bottom: 1px solid #455560;
+h1{
 	font-size: 20px;
+	line-height: 27px;
 }
-.topnav{
-	display: inline;
-	margin-left: 60px;
-
-	a{
-		text-decoration: none;
-	}
-	a:visited{
-		color: #94ABAC;
-	}
-	a:hover{
-		color: #F89728;
-	}
+strong{
+	font-weight: bold;
 }
-#logo{
-	margin-left: 50px;
-	padding-top: 30px;
+ol,ul{
+	list-style: none outside none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+    display: block;
+}
+a{
+	outline: 0px none;
+	text-decoration: none;
+}
+.hero-section {
+    padding: 0px;
+    height: 688px;
+    margin: 0px auto;
+}
+.main-header .actions, .main-header .top-nav {
+    position: absolute;
+    top: 0px;
+    height: 100px;
+}
+.centered-element, .header-nav, .nav-drawer .drawer-content, .footer-nav, .main-content, .aside-content {
+    width: 1070px;
+    margin: 0px auto;
+}
+.content{
+	width: 1070px;
+	margin: 0px auto;
+	color: rgb(0, 0, 0);
+	overflow: hidden;
+	min-width: 1020px;
+	box-shadow: none;
+	border-bottom: 1px solid rgb(255, 255, 255);
+}
+.view {
+	position: relative;
+	width: 1070px;
+	height: 700px;
+	overflow: hidden;
+}
+.underlay{
+	position: relative;
+	width: 1070px;
+	height: 100%;
+	top: 100px;
+	overflow: hidden;
+	background: rgb(200,200,200);
+}
+.header-wrapper {
+    position: relative;
+}
+.main-header{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	border-bottom: 1px solid #ffffff;
+	min-width: 1020px;
+	height: 100px;
+	z-index: 100;
+}
+.main-header .home-link{
+	position: absolute;
+    top: 0px;
+	height: 75px;
+	left: 0px;
+	display: block;
+	width: 290px;
+	padding: 25px 0px 0px 30px;
+}
+.main-header a.home-link, .main-header a.nav-link {
+    background: none repeat scroll 0% 0% transparent;
+    -moz-transition: background 0.2s ease-in-out 0s;
+}
+.main-header .actions{
+	right: 1px;
+	z-index: 1;
+	width: 100px;
+	padding: 35px 50px 0px 80px;
+	height: 65px;
+
+}
+.header{
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	margin-bottom: 50px;
+	box-shadow: 0px 1px 4px rgba(0,0,0,0.2);
+	border-bottom: 1px solid #666;
+	min-width: 1020px;
+	height: 200px;
+}
+.header-nav{
+	position: relative;
+	width: 1070px;
+}
+.button {
+	line-height: 18px;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	text-shadow: 0px 1px rgb(255,255,255);
+	color: #455560;
+	background: #EEE;
+	border: 1px solid #b0b0b0;
+	box-shadow: none;
+	-moz-background-origin: border;
+	-moz-box-shadow: none;
+	-ms-background-origin: border-box;
+	-o-background-origin: border-box;
+	text-shadow: 0 1px #fff;
+	-webkit-background-origin: border;
+	-webkit-box-shadow: none;
+	min-width: 100px;
+}
+.button, input, textarea{
+	border-radius: 5px 5px 5px 5px;
+	padding: 7px 5px;
+	top: 0px;
+	left: 0px;
+	margin-top: 5px;
+	box-shadow: none;
+	border-width: 1px;
+	border-style: solid;
+	border: 1px solid rgb(174, 174, 174);
+	-moz-border-top-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	border-image: none;
+}
+.button:hover{
+	background: #e5e5e5;
+	border-color: #dedede #d4d4d4 #c8c8c8;
+}
+.button:active{
+	background: #ccc;
+	background: linear-gradient(#cccccc,#eeeeee);
+	background: -moz-linear-gradient(#cccccc,#eeeeee);
+	background: -o-linear-gradient(#cccccc,#eeeeee);
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #eeeeee));
+	background: -webkit-linear-gradient(#cccccc,#eeeeee);
+	border-color: #828282 #b4b4b4 #dfdfdf;
+	box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+}
+.signin-button{
+	padding: 5px 5px;
+	font-size: 13px;
+	min-width: 78px;
+}
+.signup{
+	margin-bottom: 30px;
+	width: 255px;
 }
 
-.toplink{
-	padding: 10px;
-	font-family: Museo, Helvetica;
-	color: #94ABAC;
-
+.password, .password-confirm{
+	width: 113px;
+	padding: 7px 5px;
 }
-
-.slashdiv{
+.top-nav {
+	right: 180px;
+	width: 569px;
+	padding-left: 1px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    overflow: hidden;
+}
+.top-nav .nav-list{
+	padding: 25px 0px 0px;
+}
+.nav-list li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.nav-item{
+	width: 180px;
+}
+.read-icon{
+	background: image_url("read-icon.png") no-repeat;
+	position: absolute;
+	opacity: 1;
+	width: 80px;
+	height: 55px;
+	top: 10px;
+	left: 56px;
+}
+.about-icon{
+	background: image_url("about-icon.png") no-repeat;
+	position: absolute;
+	opacity: 1;
+	width: 53px;
+	height: 55px;
+	top: 10px;
+	left: 61px;
+}
+.explore-icon{
+	background: image_url("explore-icon.png") no-repeat;
+	position: absolute;
+	opacity: 1;
+	width: 52px;
+	height: 55px;
+	top: 10px;
+	left: 62px;
+}
+.top-nav .nav-icon {
+	opacity: 1;
+	position: absolute;
+	top: 10px;
+}
+.top-nav .tagline{
+	display: block;
+	font-size: 12px;
+	line-height: 12px;
+	color: rgb(127, 151, 153);
+}
+.top-nav .nav-link {
+    display: block;
+    position: relative;
+    text-align: center;
+    height: 40px;
+	padding: 60px 0px 0px;
+    font-size: 16px;
 	color: #455560;
 }
-
-.login{
-	position: fixed;
-	right: 40px;
-	top: 20px;
-	text-align: -webkit-center;
-	
-	a{
-		color: #455560;
-		text-decoration: underlined;
-	}
-	a:visited{
-		color:black;
-	}
-	a:hover {
-		color: #FF9A42;
-	}
+input{
+	font-family: Museo, sans-serif, arial;
+	font-size: 13px;
+	font-weight: bold;
+	width: 242px;
 }
-
-.content_pane{
-	margin-top: 150px;
-	font-size: 15px;
-	height: 50%;
-	margin-left: 50px;
-	margin-right: 50px;
-	border-right: 1px #455560 solid;
-	border-left: 1px #455560 solid;
-	padding: 15px;
+input:-moz-placeholder {
+	color: #95A2AC;
 }
-
-.shadow {
-	/* For all other browsers */
-	-moz-box-shadow: 3px 3px 4px #666;
-	-webkit-box-shadow: 3px 3px 4px #666;
-	box-shadow: 3px 3px 4px #666;
-	/* For IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666')";
-	/* For IE 5.5 - 7 */
-	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#666666');
+input:-webkit-input-placeholder{
+	color: #95A2AC;
 }
+.text{
+	display: block;
+	width: 100%;
+}
+.start, .join-field {
+	width: 254px;
+	margin: 5px 0px 0px;
+}
+.start{
+	color: white;
+	text-shadow: 0px -1px rgb(149, 162, 172);
+	background: #00B1FF;
+	background: linear-gradient(#00B1FF,#0089B9);
+	background: -moz-linear-gradient(#00B1FF, #0089B9);
+	background: -o-linear-gradient(#00B1FF,#0089B9);
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00B1FF), color-stop(100%, #0089B9));
+	background: -webkit-linear-gradient(#00B1FF,#0089B9);
+}
+.start:hover{
+	background: #28BED4;
+	border-color: #dedede #d4d4d4 #c8c8c8;
+}
+.start:active{
+	background: #ccc;
+	background: linear-gradient(#0089B9,#00B1FF);
+	background: -moz-linear-gradient(#0089B9, #00B1FF);
+	background: -o-linear-gradient(#0089B9,#00B1FF);
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0089B9), color-stop(100%, #00B1FF));
+	background: -webkit-linear-gradient(#0089B9,#00B1FF);
+	border-color: #828282 #b4b4b4 #dfdfdf;
+	box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+}
+.login-button{
+	background: #ccc;
+	background: linear-gradient(#ccc,#999);
+	background: -moz-linear-gradient(#ccc, #999);
+	background: -o-linear-gradient(#ccc,#999);
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ccc), color-stop(100%, #999));
+	background: -webkit-linear-gradient(#ccc,#999);
+}
+.login-button:hover{
+	background: #28BED4;
+	border-color: #dedede #d4d4d4 #c8c8c8;
+}
+.login-button:active{
+	background: #ccc;
+	background: linear-gradient(#0089B9,#00B1FF);
+	background: -moz-linear-gradient(#0089B9, #00B1FF);
+	background: -o-linear-gradient(#0089B9,#00B1FF);
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0089B9), color-stop(100%, #00B1FF));
+	background: -webkit-linear-gradient(#0089B9,#00B1FF);
+	border-color: #828282 #b4b4b4 #dfdfdf;
+	box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0 1px 0 1px rgba(0,0,0,0.05),inset 0 1px rgba(0,0,0,0.1);
+}
+.get-started{
+	opacity: 1;
+	z-index: 3;
+	top: 30px;
+	width: 255px;
+	height: 100px;
+	left: 125px;
+	padding: 0px 20px;
+	position: absolute;
+	display: block;
+}
+.container{
+	opacity: 1;
+	z-index: 3;
+	margin: 50px;
+	position: absolute;
+}
+.container h1{
+	margin-bottom: 8px;
+}
+.container li{
+	margin: 0px 0px 5px 15px;
+}
+.login-pane, .signup-pane{
+	position: absolute;
+	display: block;
+	z-index: 3;
+	top: 100px;
+	width: 255px;
+	padding: 0px 20px 15px 20px;
+	border-radius: 5px 5px 5px 5px;
 
-.neat{
-	td{
-		border: 1px black solid;
-	}
+	background-color: #999;
+}
+.signup-pane{
+	right: 220px;
+}
+.login-pane{
+	left: 220px;
+}
+.login-pane form, .signup-pane legend{
+	padding-top: 5px;
+}
+#notice{
+	color: #f89728;
+}
+.footer-nav{
+	color: #aaa;
+	text-align: center;
 }

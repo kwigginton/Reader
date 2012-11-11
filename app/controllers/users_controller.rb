@@ -99,7 +99,7 @@ class UsersController < ApplicationController
       redirect_to eval("#{user.role}_url")
       
     else
-      redirect_to login_url, alert: "Invalid user/password combination"
+      redirect_to login_url, alert: "Invalid Email or Password"
     end
   end
 end
