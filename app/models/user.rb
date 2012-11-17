@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, format: { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }, uniqueness: {message: " is already in use."}
   
-  has_many :feeds, :through => :subscriptions, :dependent => :destroy
+  has_many :feeds, through: :subscriptions
   
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   
   has_secure_password
   

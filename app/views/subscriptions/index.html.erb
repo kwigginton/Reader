@@ -1,5 +1,5 @@
-<h1>Your subscriptions</h1>
-
+<% unless is_admin? %> <h1>Your subscriptions</h1>
+<% else %><h1>Listing all subscriptions</h1><% end %>
 <table class="neat">
   <tr>
     <th></th>

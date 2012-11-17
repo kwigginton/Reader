@@ -1,6 +1,6 @@
 <% #The views for these JS files are in logically reverse order since they render after the action is taken.
 if session[:read_mode] == :subscription %>
-	$('#subscribe').html("<%=j link_to 'Unsubscribe', subscription_path( id: session[:subscription_current]), method: :delete, remote: true %>");
+	$('#subscribe').html("<%=j link_to 'Unsubscribe', subscription_path( id: Subscription.find_by_feed_id(session[:subscription_current])), method: :delete, remote: true %>");
 <% else %>
-	$('#subscribe').html("<%=j link_to 'Unsubscribe', subscription_path( id: session[:random_current]), method: :delete, remote: true %>");
+	$('#subscribe').html("<%=j link_to 'Unsubscribe', subscription_path( id: Subscription.find_by_feed_id(session[:random_current])), method: :delete, remote: true %>");
 <% end %>

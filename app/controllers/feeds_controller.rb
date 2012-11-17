@@ -1,3 +1,4 @@
+include ReaderLogic
 class FeedsController < ApplicationController
   skip_before_filter :authorize_admin
   # GET /feeds
@@ -41,7 +42,6 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    #TODO enqueue created feed for next view
     @feed = Feed.new(params[:feed])
     feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
     if(feed && !(feed.is_a? Fixnum))
@@ -52,6 +52,7 @@ class FeedsController < ApplicationController
     end
     respond_to do |format|
       if @feed.save
+        session[:random_feeds] << session[:random_current] = @feed.id
         format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
@@ -82,7 +83,18 @@ class FeedsController < ApplicationController
   def destroy
     @feed = Feed.find(params[:id])
     @feed.destroy
+    if(session[:read_mode] == :subscription)
 
+      get_next_subscription if(session[:subscription_current] == @feed.id)
+      
+      session[:subscription_feeds].delete @feed.id
+    end
+    if(session[:read_mode] == :random)
+      
+      get_next_random if(session[:random_current] == @feed.id)
+        
+      session[:random_feeds].delete @feed.id
+    end
     respond_to do |format|
       format.html { redirect_to feeds_url }
       format.json { head :no_content }

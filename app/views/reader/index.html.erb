@@ -4,12 +4,12 @@
         <h1><%= entry.title %></h1>
         
         <span class="byline">
-		<% if entry.published%><%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %> <% end %>
+		<% if entry.published %><%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %> <% end %>
             <% if entry.author %> by <%= sanitize(entry.author) %> <% end %>
         </span>
         
         </br>
-        <% unless entry.content and not entry.content.empty? %>
+        <% unless !!entry.content and not entry.content.empty? %>
             <div class="summary"><%= sanitize(entry.summary) %></div>
         <% else %>
             <div class="reader-content"><%= sanitize(entry.content) %></div>

@@ -1,20 +1,14 @@
-<% if @feed %>
-    <% @feed.entries.each do |entry| %>
-        <div class="entry">
-            <h1><%= entry.title %></h1>
-            <%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %>
-            </br>
-            <% unless entry.content and not entry.content.empty? %>
-                <div class="summary"><%= sanitize(entry.summary) %></div>
-            <% else %>
-                <div class="reader-content"><%= sanitize(entry.content) %></div>
-            <% end %>
+ <% @feed.entries.each do |entry| %>
+     <div class="entry">
+         <h1><%= entry.title %></h1>
+		<% if !!entry.published %><%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %><% end %>
+         </br>
+         <% unless entry.content and not entry.content.empty? %>
+             <div class="summary"><%= sanitize(entry.summary) %></div>
+         <% else %>
+             <div class="reader-content"><%= sanitize(entry.content) %></div>
+         <% end %>
 
-            <hr style="height: 1px;">
-        </div>
-    <% end %>
-<% else %>
-<div class = "entry">
-    <h1>You have no active subscriptions!</h1>
-</div>
-<% end %>
+         <hr style="height: 1px;">
+     </div>
+ <% end %>

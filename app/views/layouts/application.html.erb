@@ -15,9 +15,12 @@
 				<%= link_to content_tag(:span, image_tag(src="oR_top.png", id: "logo", alt: "onReader"), class: 'home-link'), welcome_url%>
 				<div class="actions">
 				    <% if is_logged_in? %>
-				        <% if is_admin? %><%= link_to "Admin", admin_path %></br></br><% end %>
-				        <%= link_to "Manage Subscriptions", subscriptions_path %>
-				        </br>
+						<div class="user-nav">
+					        <% if is_admin? %>
+								<%= link_to "Admin", admin_path %>
+							<% end %>
+					        <%= link_to "Manage Account", subscriptions_path %>
+				        </div>
 				        <%= link_to "Sign Out", logout_path, :method => :delete, :class => 'button signin-button' %>
 				    <% else %>
 				        <%= link_to "Sign In", login_path, :class => 'button signin-button' %>
@@ -25,7 +28,7 @@
 				</div>
 				<ul class="top-nav nav-list">
 				    <li class="nav-item">
-						<a class='nav-link' href="reader">
+						<a class='nav-link' href="/reader">
 							<i class='read-icon'></i>
 							
 							<strong>Read</strong>
@@ -33,14 +36,14 @@
 						</a>
 					</li>
 				    <li class="nav-item">
-						<a class='nav-link' href="explore">
+						<a class='nav-link' href="/explore">
 							<i class='explore-icon'></i>
 							<strong>Explore</strong>
 							<span class="tagline">Discover new content.</span>
 						</a>
 					</li>
 				    <li class="nav-item">
-					<a class='nav-link' href="about">
+					<a class='nav-link' href="/about">
 						<i class='about-icon'></i>
 						
 						
@@ -54,7 +57,9 @@
 	<div class="content">
 		<div class="view">
 			<div class="underlay">
-				<%= yield %>
+				<div class="container">
+					<%= yield %>
+				</div>
 			</div>
 		</div>
 		<div class="footer-nav">

@@ -1,10 +1,15 @@
 class SubscriptionsController < ApplicationController
-  skip_before_filter :authorize_admin
+  include ApplicationHelper
+  
+  skip_before_filter :authorize_admin, only: [:index, :new, :create, :destroy]
   # GET /subscriptions
   # GET /subscriptions.json
   def index
-    @subscriptions = Subscription.find_all_by_user_id(session[:user_id])
-
+    if is_admin?
+      @subscriptions = Subscription.find(:all)
+    else
+      @subscriptions = Subscription.find_all_by_user_id(session[:user_id])
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @subscriptions }
@@ -87,14 +92,14 @@ class SubscriptionsController < ApplicationController
    # if params[:feed_id]
   #    @subscription = Subscription.find_by_user_id_and_feed_id(session[:user_id], params[:feed_id])
   #  else
-      @subscription = Subscription.find_by_feed_id_and_user_id(params[:id], session[:user_id])
-      puts "Here's the subscription------"
+      @subscription = Subscription.find(params[:id])
+
       puts @subscription
   #  end
     
     #Remove unwanted feed from session tracking
     if session[:subscription_feeds]
-      session[:subscription_feeds].delete @subscription.id
+      session[:subscription_feeds].delete @subscription.feed_id
     end
     
     

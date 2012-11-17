@@ -2,7 +2,7 @@ class Feed < ActiveRecord::Base
   attr_accessible :feed_url, :title, :author, :feed_data
   validates :feed_url, :uniqueness => true, :presence => true
   
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   has_many :users, :through => :subscriptions
   
   serialize :feed_data

@@ -18,7 +18,10 @@
 				<div class="actions">
 				    <% if is_logged_in? %>
 				        <%= link_to "Sign Out", logout_path, :method => :delete, :class => 'button signin-button' %>
-					<% if is_admin? %><%= link_to "Admin", admin_path %><% end %>
+						<div class="user-nav">
+							<% if is_admin? %><%= link_to "Admin", admin_path %><% end %>
+							<%= link_to "Manage Account", subscriptions_path %>
+						</div>
 				    <% else %>
 				        <%= link_to "Sign In", login_path, :class => 'button signin-button' %>
 				    <% end %>

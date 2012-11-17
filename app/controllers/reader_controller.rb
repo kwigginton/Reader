@@ -7,13 +7,12 @@ class ReaderController < ApplicationController
   #TODO
   #Have feeds read from random order but in a vote-weighted order
   def index
-    @feed = get_next_random
+    @feed = set_random_mode
   end
   
   def read_subscriptions
-    @feed = get_next_subscription
+    @feed = set_subscription_mode
   end
-  
   
   def next_subscription
     @feed = get_next_subscription
