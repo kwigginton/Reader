@@ -1,7 +1,7 @@
 <div class="intro">
 	<%= image_tag "front.png"%>
 </div>
-<% if !logged_in? %>
+<% if !is_logged_in? %>
 <div class="get-started">
 	<h1 class="headline">Join the easiest way to read about your favorite things.</h1>
 	<%= form_for(@user) do |f| %>
