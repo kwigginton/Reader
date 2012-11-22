@@ -1,6 +1,7 @@
 <div class="intro">
 	<%= image_tag "front.png"%>
 </div>
+<% if !logged_in? %>
 <div class="get-started">
 	<h1 class="headline">Join the easiest way to read about your favorite things.</h1>
 	<%= form_for(@user) do |f| %>
@@ -9,4 +10,5 @@
 		<%= f.password_field :password_confirmation, :class => "password-confirm", :placeholder => "Confirm Password", :onblur => "if (this.placeholder =='') this.placeholder='Confirm Password';".html_safe %>
 		<%= f.submit "Start Reading", :class => 'button start' %>
 	<% end %>
+<% end %>
 </div>
