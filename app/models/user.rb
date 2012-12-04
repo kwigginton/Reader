@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   
   has_many :subscriptions, dependent: :destroy
   
+  #vote relationship
+  has_and_belongs_to_many :feeds
+  has_and_belongs_to_many :posts
+  
   has_secure_password
   
   def init

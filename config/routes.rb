@@ -40,6 +40,9 @@ Reader::Application.routes.draw do
 
   resources :users
 
+  resources :votes
+  resources :categories
+  resources :posts
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

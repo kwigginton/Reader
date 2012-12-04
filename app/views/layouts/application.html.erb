@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>onReader</title>
+  <title>onReader - <%= yield(:title).empty? ? "Reading, Redefined" : yield(:title) %></title>
   
   <%= stylesheet_link_tag params[:controller] %>
   <%= javascript_include_tag "application" %>
@@ -64,6 +64,13 @@
 		</div>
 		<div class="footer-nav">
 			<p class="copyright">© 2012 onReader. All rights reserved.</p>
+			<p>
+				<% if mobile_device? %>
+					<%= link_to "Full Site", mobile: 0 %>
+				<% else %>
+					<%= link_to "Mobile Site", mobile: 1 %>
+				<% end %>
+			</p>
 		</div>
 	</div>
 	<script type="text/javascript">

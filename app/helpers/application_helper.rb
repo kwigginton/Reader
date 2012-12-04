@@ -12,4 +12,7 @@ module ApplicationHelper
     Subscription.find_by_user_id_and_feed_id(session[:user_id], feed_id)
   end
 
+  def title(page_title)
+    content_for(:title) { page_title }
+  end
 end

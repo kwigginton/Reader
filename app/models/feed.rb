@@ -4,6 +4,10 @@ class Feed < ActiveRecord::Base
   
   has_many :subscriptions, dependent: :destroy
   has_many :users, :through => :subscriptions
+  has_and_belongs_to_many :categories
+  
+  #vote relation
+  has_many :votes, as: :votable, dependent: :destroy
   
   serialize :feed_data
   
