@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123011157) do
+ActiveRecord::Schema.define(:version => 20121205191921) do
 
   create_table "categories", :force => true do |t|
     t.string   "category_name"
@@ -44,8 +44,11 @@ ActiveRecord::Schema.define(:version => 20121123011157) do
     t.binary   "content"
     t.string   "author"
     t.float    "rank"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "title"
+    t.string   "guid"
+    t.datetime "published_at"
   end
 
   create_table "subscriptions", :force => true do |t|

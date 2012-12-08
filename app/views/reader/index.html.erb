@@ -1,21 +1,21 @@
-<% unless @feed.is_a? Fixnum #protect against bad feed URLs returning 404, 503 etc... TODO better handling
-    @feed.entries.each do |entry| %>
+<% #unless @posts.is_a? Fixnum #protect against bad feed URLs returning 404, 503 etc... TODO better handling
+    @posts.each do |p| %>
     <div class="entry">
-        <h1><%= entry.title %></h1>
+        <h1><%= p.title %></h1>
         
         <span class="byline">
-		<% if entry.published %><%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %> <% end %>
-            <% if entry.author %> by <%= sanitize(entry.author) %> <% end %>
+		<% if p.published_at %><%= p.published_at.strftime("on %m/%d/%Y at %I:%M%p") %> <% end %>
+            <% if p.author %> by <%= sanitize(p.author) %> <% end %>
         </span>
         
         </br>
-        <% unless !!entry.content and not entry.content.empty? %>
-            <div class="summary"><%= sanitize(entry.summary) %></div>
+        <% unless !!p.content and not p.content.empty? %>
+            <div class="summary"><%= sanitize(p.summary) %></div>
         <% else %>
-            <div class="reader-content"><%= sanitize(entry.content) %></div>
+            <div class="reader-content"><%= sanitize(p.content) %></div>
         <% end %>
         <hr style="height: 1px;">
     </div>
-<% end %>
+<% #end %>
 <% end %>
 

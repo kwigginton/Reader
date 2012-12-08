@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     redirect_to welcome_url, :notice => "You must log in to access user actions"
   end
+  helper_method :current_user
+  
+  def admin?
+    current_user.is_admin?
+  end
+  helper_method :admin?
   
   def mobile_device?
     if session[:mobile_param] 
@@ -24,10 +30,14 @@ class ApplicationController < ActionController::Base
   end
   helper_method :mobile_device?
   
+  def parse_categories(catStr)
+   #TODO return an array of category strings
+  end
+  
   protected
   
   def authorize_admin
-    unless User.is_admin(session[:user_id])
+    unless admin?
       session[:return_to] = request.url
       redirect_to login_url, :notice => "Please log in."
     end
@@ -40,7 +50,7 @@ class ApplicationController < ActionController::Base
 # end
   
   def authorize_reader
-    unless User.is_reader(session[:user_id]) || User.is_admin(session[:user_id])
+    unless User.is_reader(session[:user_id]) || admin?
       puts "\n\n\n\n\n"
       puts request.url
       puts "\n\n\n\n\n"
@@ -48,4 +58,6 @@ class ApplicationController < ActionController::Base
       redirect_to login_url, :notice => "Please log in"
     end
   end
+
+    
 end

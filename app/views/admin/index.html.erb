@@ -1,5 +1,5 @@
 <% title "Administration" %>
-<h1>Welcome back <%= User.find(session[:user_id]).email %></h1>
+<h1>Welcome back <%= current_user.email %></h1>
 
 <h1>Stat Reporting</h1>
 <fieldset><legend>onReader has:</legend>

@@ -2,20 +2,22 @@
 
 <table class="neat">
   <tr>
+	<th>Feed_id</th>
     <th>Title</th>
     <th>Author</th>
     <th>Feed url</th>
-    <th>Serialized</th>
+	<th>#Posts</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @feeds.each do |feed| %>
   <tr>
+	<td><%= feed.id %></td>
 	<td><%= feed.title %></td>
 	<td><%= feed.author %></td>
     <td><%= feed.feed_url %></td>
-	<td><%= !!feed.feed_data %></td>
+	<td><%= feed.posts.count %></td>
     <td><%= link_to 'Show', feed %></td>
     <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
     <td><%= link_to 'Destroy', feed, confirm: 'Are you sure?', method: :delete %></td>

@@ -4,8 +4,8 @@
 <% end %>
 <html>
 <head>
-    <% if @feed and not @feed.is_a? Fixnum%>
-      <title>Reading: <%= @feed.title %></title>
+    <% if !!@posts and not @posts.empty?#and not @feed.is_a? Fixnum%>
+      <title>Reading: <%= curr_feed.title %></title>
   <% else %>
       <title>No active subscriptions</title>
   <% end %>
@@ -63,11 +63,10 @@
 				</div>
 				
 				<div id="subscribe" class="shadow">
-				<% if session[:read_mode] == :subscription || session[:read_mode] == :random
-				    #Hard link to log in/ sign up if guest tries to subscribe.
+				<% #Hard link to log in/ sign up if guest tries to subscribe.
 				    #super future TODO associate subscriptions to Visitor IPs so they don't need to sign up, but limit it to some low number.
-				    if is_logged_in?
-				        unless is_subscribed?(session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]) %>
+					if is_logged_in?
+						unless is_subscribed?(session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]) %>
 				          <%= link_to 'Subscribe', subscriptions_path( :id => (session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current])), :method => :post, :remote => :true%>
 						<% else %>
 				            <%= link_to 'Unsubscribe', subscription_path( :id => Subscription.find_by_feed_id((session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]))), :method => :delete, :remote => true %>
@@ -75,8 +74,7 @@
 					else %>
 						<%= link_to 'Subscribe', login_path %>
 
-				    <%  end
-				    end %>
+				<% end %>
 				</div>
 			</nav>
 		</header>
@@ -93,7 +91,7 @@
 			<% end %>
 		</nav>
 		<div class="view">
-			<header class="centered-element blog-title"><h1><%= @feed.title %></h1></header>
+			<header class="centered-element blog-title"><h1><%= curr_feed.title %></h1></header>
 			<div class="underlay">
 				<%= yield %>
 			</div>

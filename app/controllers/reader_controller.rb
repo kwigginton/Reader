@@ -7,31 +7,42 @@ class ReaderController < ApplicationController
   #TODO
   #Have feeds read from random order but in a vote-weighted order
   def index
-    @feed = set_random_mode
+    @posts = set_random_mode
   end
   
   def read_subscriptions
-    @feed = set_subscription_mode
+    @posts = set_subscription_mode
   end
   
   def next_subscription
-    @feed = get_next_subscription
+    @posts = get_next_subscription
     render 'read_subscriptions'
   end
   
   def previous_subscription
-    @feed = get_previous_subscription
+    @posts = get_previous_subscription
     render 'read_subscriptions'
   end
   
   def next_random
-    @feed = get_next_random
+    @posts = get_next_random
     render :index
 
   end
   
   def previous_random
-    @feed = get_previous_random
+    @posts = get_previous_random
     render :index
   end
+  
+  protected
+  def curr_feed
+    #TODO handle error case where Feed has been deleted but Posts persist.
+    if session[:read_mode] == :random
+      Feed.find(session[:random_current])
+    else
+      Feed.find(session[:subscription_current])
+    end
+  end
+  helper_method :curr_feed
 end

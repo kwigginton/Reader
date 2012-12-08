@@ -45,5 +45,5 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'ruby-debug'
 
 # Use feedzirra for parsing feeds
-gem 'feedzirra'
+gem 'feedzirra', git: 'git://github.com/pauldix/feedzirra.git'
 gem 'nokogiri', '~> 1.5.5'

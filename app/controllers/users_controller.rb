@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize_reader, :authorize_admin, :only => [:new, :create]
-
+  skip_before_filter :authorize_reader, :authorize_admin, only: [:new, :create]
+  skip_before_filter :authorize_admin, only: [:show, :edit, :destroy, :update]
   # GET /users
   # GET /users.json
   def index
@@ -15,8 +15,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-
+    unless admin? # if not admin, restrict access
+      @user = current_user
+    else
+      @user = User.find(params[:id])
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -36,7 +39,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    unless admin? # if admin, give all access
+      @user = current_user
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   # POST /users

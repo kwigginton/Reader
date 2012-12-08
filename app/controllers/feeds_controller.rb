@@ -1,6 +1,6 @@
 include ReaderLogic
 class FeedsController < ApplicationController
-  skip_before_filter :authorize_admin
+  skip_before_filter :authorize_admin, only: [:new, :create]
   # GET /feeds
   # GET /feeds.json
   def index
@@ -45,14 +45,17 @@ class FeedsController < ApplicationController
     @feed = Feed.new(params[:feed])
     feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
     if(feed && !(feed.is_a? Fixnum))
+      #Populate Feed object
       @feed.title = feed.title
       @feed.author = feed.entries.first.author
       @feed.feed_url = feed.feed_url
-      @feed.feed_data = feed
     end
     respond_to do |format|
       if @feed.save
-        session[:random_feeds] << session[:random_current] = @feed.id
+        #Place newly added/saved feed into reading list for current user just after previously read feed
+        session[:random_feeds].insert(session[:random_feeds].index(session[:random_current]), session[:random_current] = @feed.id)
+        #parse posts from the feed
+        Post.update_from_feed(@feed.id)
         format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
