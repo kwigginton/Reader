@@ -1,0 +1,21 @@
+// Place all the styles related to the Mobile view here.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div{
+	display: block;
+}
+p{
+	text-align: center;
+}
+.page{
+	margin: 0px auto;
+}
+.content{
+	width: 300px;
+	margin: inherit;	
+}
+.home-link{
+	background:url(oR_top.png) no-repeat center center;
+	height: 45px;
+	width: 300px;
+}

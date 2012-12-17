@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Category name:</b>
+  <%= @category.category_name %>
+</p>
+<p>
+	<b>#Assoc. Feeds</b>
+	<%= @category.feed_ids.count %>
+</p>
+<p>
+	<b>#Assoc. Posts</b>
+	<%= @category.post_ids.count %>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

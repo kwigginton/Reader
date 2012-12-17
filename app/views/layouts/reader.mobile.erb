@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<% if notice %>
+    <div class="notice"><%= notice %></div>
+<% end %>
+<html>
+<head>
+    <% if @feed and not @feed.is_a? Fixnum%>
+      <title>Reading: <%= @feed.title %></title>
+  <% else %>
+      <title>No active subscriptions</title>
+  <% end %>
+  <%= stylesheet_link_tag    "reader", :media => "all" %>
+  <%= javascript_include_tag "reader" %>
+  <%= javascript_include_tag :application %>
+  <%= csrf_meta_tags %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('.entry a').click(function() {
+              window.open(this.href, 'onReader', 'width=700,height=800');
+              return false;
+          });
+      });
+  </script>
+</head>
+<body class="hero-section">
+	<div class="header-wrapper">
+		<header class="main-header">
+			<nav class="header-nav">
+				<%= link_to content_tag(:span, image_tag("oR_small.png", id: "reader-logo", alt: "onReader"), class: "home-link"), welcome_url %>
+				<div class="top-nav">
+					<ul class="nav-list">
+					    <li class="nav-item">
+							<%= link_to "Explore", explore_path %>
+						</li>
+					    <li class="nav-item">
+							<%= link_to "Add a feed", new_feed_path %>
+						</li>
+						<% if is_logged_in? %>
+							<li class="nav-item">
+								<% if session[:read_mode] == :random %>
+									<%= link_to "Subscription View", reader_subscriptions_path %>
+								<% else %>
+									<%= link_to "Random View", reader_path %>
+								<% end %>
+							</li>
+							<li class="nav-item">
+								<%= link_to "Manage Subscriptions", subscriptions_path %>
+							</li>
+							<div class="actions">
+							<%= link_to "Sign Out", logout_path, :method => :delete, :class => 'button signin-button' %>
+					    <% else %>
+							<div class="actions">
+						    <%= link_to "Sign In", login_path, :class => 'button signin-button' %>
+						<% end %>
+						</div>
+						</li>
+					</ul>
+					
+					
+					
+					
+				</div>
+				
+				<div id="subscribe" class="shadow">
+				<% if session[:read_mode] == :subscription || session[:read_mode] == :random
+				    #Hard link to log in/ sign up if guest tries to subscribe.
+				    #super future TODO associate subscriptions to Visitor IPs so they don't need to sign up, but limit it to some low number.
+				    if is_logged_in?
+				        unless is_subscribed?(session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]) %>
+				          <%= link_to 'Subscribe', subscriptions_path( :id => (session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current])), :method => :post, :remote => :true%>
+						<% else %>
+				            <%= link_to 'Unsubscribe', subscription_path( :id => Subscription.find_by_feed_id((session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]))), :method => :delete, :remote => true %>
+				    	<% end 
+					else %>
+						<%= link_to 'Subscribe', login_path %>
+
+				    <%  end
+				    end %>
+				</div>
+			</nav>
+		</header>
+	</div>
+	
+	<div class="content">
+		<nav>
+			<% if session[:read_mode] == :random  %>
+				<%= link_to '', reader_next_random_path, html_options = {:class => "flow flow-right", :alt => "next"}%>
+				<%= link_to '', reader_previous_random_path, html_options = {:class => "flow flow-left", :alt => "previous"} %>
+			<% else %>
+				<%= link_to '', reader_next_subscription_path, html_options = {:class => "flow flow-right", :alt => "next"} %>
+				<%= link_to '', reader_previous_subscription_path, html_options = {:class => "flow flow-left", :alt => "previous"} %>
+			<% end %>
+		</nav>
+		<div class="view">
+			<header class="centered-element blog-title"><h1><%= @feed.title %></h1></header>
+			<div class="underlay">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	  var GoSquared = {};
+	  GoSquared.acct = "GSN-825704-V";
+	  (function(w){
+	    function gs(){
+	      w._gstc_lt = +new Date;
+	      var d = document, g = d.createElement("script");
+	      g.type = "text/javascript";
+	      g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+	      var s = d.getElementsByTagName("script")[0];
+	      s.parentNode.insertBefore(g, s);
+	    }
+	    w.addEventListener ?
+	      w.addEventListener("load", gs, false) :
+	      w.attachEvent("onload", gs);
+	  })(window);
+	</script>
+</body>
+</html>

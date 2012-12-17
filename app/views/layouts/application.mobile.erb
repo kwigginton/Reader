@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>onReader - <%= yield(:title).empty? ? "Reading, Redefined" : yield(:title) %></title>
+  
+	<%= stylesheet_link_tag "mobile" %>
+	<% #javascript_include_tag "/jqtouch/lib/zepto.min.js", "/jqtouch/jqtouch.min.js" %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+<body>
+	<div class="page">
+		<div class="content">
+			<%= link_to content_tag(:div, '', class: 'home-link'), welcome_url%>
+			<%= yield %>
+			<p>
+				The Mobile view is still under construction, check back soon!
+			</p>
+			<p>
+				<% if mobile_device? %>
+					<%= link_to "Full Site", mobile: 0 %>
+				<% else %>
+					<%= link_to "Mobile Site", mobile: 1 %>
+				<% end %>
+			</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+	  var GoSquared = {};
+	  GoSquared.acct = "GSN-825704-V";
+	  (function(w){
+	    function gs(){
+	      w._gstc_lt = +new Date;
+	      var d = document, g = d.createElement("script");
+	      g.type = "text/javascript";
+	      g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+	      var s = d.getElementsByTagName("script")[0];
+	      s.parentNode.insertBefore(g, s);
+	    }
+	    w.addEventListener ?
+	      w.addEventListener("load", gs, false) :
+	      w.attachEvent("onload", gs);
+	  })(window);
+	</script>
+</body>
+</html>

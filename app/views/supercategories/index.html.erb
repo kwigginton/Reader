@@ -1,0 +1,25 @@
+<h1>Listing supercategories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th># Sub-Cats</th>
+    <th># Feeds</th>
+    <th></th>
+  </tr>
+
+<% @supercategories.each do |supercategory| %>
+  <tr>
+    <td><%= supercategory.name %></td>
+	<td><%= supercategory.category_ids.count%></td>
+	<td><%= supercategory.feed_ids.count %></td>
+    <td><%= link_to 'Show', supercategory %></td>
+    <td><%= link_to 'Edit', edit_supercategory_path(supercategory) %></td>
+    <td><%= link_to 'Destroy', supercategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Supercategory', new_supercategory_path %>

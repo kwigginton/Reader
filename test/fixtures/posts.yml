@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  feed_id: 1
+  summary: 
+  content: 
+  author: MyString
+  rank: 1.5
+
+two:
+  feed_id: 1
+  summary: 
+  content: 
+  author: MyString
+  rank: 1.5

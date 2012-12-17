@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Feed:</b>
+  <%= @post.feed_id %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= strip_tags(@post.summary) %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= strip_tags(@post.content) %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @post.author %>
+</p>
+
+<p>
+  <b>Rank:</b>
+  <%= @post.rank %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

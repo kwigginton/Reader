@@ -1,0 +1,24 @@
+<% unless is_admin? %> <h1>Your subscriptions</h1>
+<% else %><h1>Listing all subscriptions</h1><% end %>
+<table class="neat">
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% if not @subscriptions.empty?
+    @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= Feed.find_by_id(subscription.feed_id).title %></td>
+        <td><%= link_to 'Unsubscribe', subscription, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+<% end
+else %>
+    You have no active subscriptions, but there's tons more interesting stuff out there! 
+<% end%>
+</table>
+
+<br />
+
+<!-- <%= link_to 'New Subscription', new_subscription_path %> -->

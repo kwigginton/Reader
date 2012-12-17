@@ -1,0 +1,39 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+        <!--
+      <h2><%= pluralize(@user.errors.count, "error") %> prevented your sign up:</h2>
+
+      <ul>
+	  -->
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      Please fill in the required fields.
+    </div>
+  <% end %>
+
+  <fieldset class="details">
+  <legend>Enter User Details</legend>
+  
+  <div>
+      <%= f.label :email, '<b>E-mail</b>'.html_safe %>:
+      <%= f.text_field :email, size: 40 %>
+  </div>
+
+  <div>
+    <%= f.label :password, '<b>Password</b>'.html_safe %>:
+    <%= f.password_field :password, size: 20 %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, '<b>Confirm</b>'.html_safe %>:
+    <%= f.password_field :password_confirmation, size: 20 %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+  </fieldset>
+<% end %>

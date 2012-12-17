@@ -1,0 +1,14 @@
+ <% @feed.entries.each do |entry| %>
+     <div class="entry">
+         <h1><%= entry.title %></h1>
+		<% if !!entry.published %><%= entry.published.strftime("on %m/%d/%Y at %I:%M%p") %><% end %>
+         </br>
+         <% unless entry.content and not entry.content.empty? %>
+             <div class="summary"><%= sanitize(entry.summary) %></div>
+         <% else %>
+             <div class="reader-content"><%= sanitize(entry.content) %></div>
+         <% end %>
+
+         <hr style="height: 1px;">
+     </div>
+ <% end %>

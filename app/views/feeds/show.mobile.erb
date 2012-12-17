@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>feed_url:</b>
+  <%= @feed.feed_url %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @feed.title %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @feed.author %>
+</p>
+
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>
