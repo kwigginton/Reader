@@ -55,7 +55,7 @@ class SubscriptionsController < ApplicationController
         
         #since user was on the feed they wanted to subscribe to, they have already read it
         if session[:subscription_feeds]
-          session[:subscription_feeds] << @subscription.id
+          session[:subscription_feeds] << @subscription.feed_id
         end
         
         format.html { redirect_to request.referer }
@@ -99,6 +99,7 @@ class SubscriptionsController < ApplicationController
     
     #Remove unwanted feed from session tracking
     if session[:subscription_feeds]
+      #session[:subscription_current] = session[:subscription_feeds].index(session[:subscription_current] - 1)
       session[:subscription_feeds].delete @subscription.feed_id
     end
     

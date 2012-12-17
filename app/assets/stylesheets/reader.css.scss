@@ -150,12 +150,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 	padding: 20px 0px 0px;
 }
 
-.blog-title{
+.blog-title, .category{
 	top: 50px;
 	background-color: white;
 	position: relative;
 	text-decoration: none;
+	padding: 0px 10px;
+	border-bottom: 1px solid #999;
+}
+.blog-title{
 	text-align: center;
+}
+.category{
+	text-align: left;
+	color: #777;
 }
 .notice {
 	position: absolute;
@@ -222,6 +230,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 .entry{
 	padding: 20px;
+}
+.title a{
+	color: #444;
+}
+.title a.visited{
+	color: #444;
+}
+.title a.hover{
+	color: #666;
 }
 h1{
 	font-family: Museo, Helvetica;

@@ -1,4 +1,6 @@
 Reader::Application.routes.draw do
+  resources :supercategories
+
   get 'explore' => 'explore#index'
 
   get 'about'=> 'static_pages#about'

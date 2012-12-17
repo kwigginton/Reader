@@ -1,11 +1,11 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :feed_url, :title, :author
+  attr_accessible :feed_url, :title, :author, :supercategory_ids
   validates :feed_url, :uniqueness => true, :presence => true
   
   has_many :subscriptions, dependent: :destroy
   has_many :posts
   has_many :users, :through => :subscriptions
-  has_and_belongs_to_many :categories
+  has_and_belongs_to_many :supercategories
   
   #vote relation
   has_many :votes, as: :votable, dependent: :destroy

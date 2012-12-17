@@ -7,7 +7,7 @@
   </tr>
 
 <% if not @subscriptions.empty?
-    @subscriptions.uniq(:feed_id).each do |subscription| %>
+    Subscription.select("DISTINCT ON (feed_id) *").each do |subscription| %>
       <tr>
         <td><%= Feed.find_by_id(subscription.feed_id).title %></td>
 		<% if is_admin? %><td><%= Feed.find(subscription.feed_id).subscriptions.count %></td><% end %>

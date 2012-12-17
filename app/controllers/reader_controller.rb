@@ -41,8 +41,14 @@ class ReaderController < ApplicationController
     if session[:read_mode] == :random
       Feed.find(session[:random_current])
     else
-      Feed.find(session[:subscription_current])
+      has_subscriptions? ? Feed.find(session[:subscription_current]) : Feed.new(title: "No Active Subscriptions")
     end
   end
   helper_method :curr_feed
+  
+  #Perhaps it would be better to query the database instead of creating a Jenga tower of conditionals
+  def has_subscriptions?
+    !!session[:subscription_current]
+  end
+  helper_method :has_subscriptions?
 end

@@ -14,6 +14,15 @@
   <div class="field">
     <%= f.label :feed_url %><br />
     <%= f.text_field :feed_url %>
+	<%= f.label :supercategories %><br />
+  </div>
+  <div class="field">
+	<% Supercategory.all.each do |supercategory|%>
+	<div>
+		<%= check_box_tag "feed[supercategory_ids][]", supercategory.id, @feed.supercategories.include?(supercategory)%>
+		<%= supercategory.name%>
+	</div>
+	<% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

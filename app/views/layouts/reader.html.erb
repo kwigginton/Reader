@@ -47,8 +47,15 @@
 							<li class="nav-item">
 								<%= link_to "Manage Subscriptions", subscriptions_path %>
 							</li>
+							<%if is_admin?%>
+								<li class="nav-item">
+									<%= link_to "Admin", admin_path %>
+								</li>
+							<%end%>
 							<div class="actions">
+								
 							<%= link_to "Sign Out", logout_path, :method => :delete, :class => 'button signin-button' %>
+							
 					    <% else %>
 							<div class="actions">
 						    <%= link_to "Sign In", login_path, :class => 'button signin-button' %>
@@ -66,11 +73,13 @@
 				<% #Hard link to log in/ sign up if guest tries to subscribe.
 				    #super future TODO associate subscriptions to Visitor IPs so they don't need to sign up, but limit it to some low number.
 					if is_logged_in?
-						unless is_subscribed?(session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]) %>
-				          <%= link_to 'Subscribe', subscriptions_path( :id => (session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current])), :method => :post, :remote => :true%>
-						<% else %>
-				            <%= link_to 'Unsubscribe', subscription_path( :id => Subscription.find_by_feed_id((session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]))), :method => :delete, :remote => true %>
-				    	<% end 
+						if has_subscriptions? or session[:read_mode] == :random
+							unless is_subscribed?(session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]) %>
+					          <%= link_to 'Subscribe', subscriptions_path( :id => (session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current])), :method => :post, :remote => :true%>
+							<% else %>
+					            <%= link_to 'Unsubscribe', subscription_path( :id => Subscription.find_by_feed_id((session[:read_mode] == :subscription ? session[:subscription_current] : session[:random_current]))), :method => :delete, :remote => true %>
+					    	<% end 
+						end
 					else %>
 						<%= link_to 'Subscribe', login_path %>
 
@@ -92,6 +101,7 @@
 		</nav>
 		<div class="view">
 			<header class="centered-element blog-title"><h1><%= curr_feed.title %></h1></header>
+			<header class="centered-element category"><b>Category: </b><%= curr_feed.supercategories.join ", " %></header>
 			<div class="underlay">
 				<%= yield %>
 			</div>

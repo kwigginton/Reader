@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   
   def admin?
-    current_user.is_admin?
+    current_user && current_user.is_admin?
   end
   helper_method :admin?
   
@@ -51,9 +51,6 @@ class ApplicationController < ActionController::Base
   
   def authorize_reader
     unless User.is_reader(session[:user_id]) || admin?
-      puts "\n\n\n\n\n"
-      puts request.url
-      puts "\n\n\n\n\n"
       session[:return_to] = request.url
       redirect_to login_url, :notice => "Please log in"
     end

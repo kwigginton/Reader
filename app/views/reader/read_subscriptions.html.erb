@@ -1,6 +1,8 @@
  <% @posts.each do |p| %>
      <div class="entry">
-         <h1><%= p.title %></h1>
+		<h1 class="title"><%if p.url %><%= link_to p.title, p.url %>
+			<%else%><%= p.title %><%end%>
+		</h1>
 		<% if !!p.published_at %><%= p.published_at.strftime("on %m/%d/%Y at %I:%M%p") %><% end %>
          </br>
          <% unless p.content and not p.content.empty? %>

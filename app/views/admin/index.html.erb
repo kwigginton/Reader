@@ -13,6 +13,8 @@
 </br>
 <%= link_to pluralize(@total_categories, "category"), categories_url %>
 </br>
+<%= link_to pluralize(@total_supercategories, "supercategories"), supercategories_url%>
+</br>
 <%= link_to pluralize(@total_votes, "vote"), votes_url %>
 <!-- probably a bad idea to query the entire user database on every admin login in the long run -->
 </fieldset>

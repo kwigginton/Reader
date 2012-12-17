@@ -37,9 +37,6 @@ module ReaderLogic
       session[:subscription_feeds] = ActiveRecord::Base.connection.select_values("select feed_id from subscriptions where user_id =#{session[:user_id]}").collect{|s| s.to_i}
       session[:subscription_current] = session[:subscription_feeds].first
     end
-    puts "\n\n\n\n\n"
-    puts session[:subscription_feeds].empty?
-    puts "\n\n\n\n\n"
     return session[:subscription_feeds].empty? ? no_subscriptions  : Post.load_entries_from_feed(session[:subscription_current], 5)
   end
   
@@ -87,52 +84,52 @@ module ReaderLogic
     #implement circular browsing flow
     if(session[:subscription_current] == session[:subscription_feeds].last)
         session[:subscription_current] = session[:subscription_feeds].first
-      else
+    else
         #Read literally as:          the next feed_id in subscription_feeds after current subscribed feed
         session[:subscription_current] = session[:subscription_feeds][session[:subscription_feeds].index(session[:subscription_current]) + 1]
-      end
+    end
 
-      return Post.load_entries_from_feed(session[:subscription_current], 5)
-    end
-    
-    def get_previous_subscription(def_feed = nil)
+    return Post.load_entries_from_feed(session[:subscription_current], 5)
+  end
+  
+  def get_previous_subscription(def_feed = nil)
 
-      if not !!session[:subscription_feeds] or session[:subscription_feeds].empty?
-        return set_subscription_mode(def_feed)
-      end
-      
-      session[:read_mode] = :subscription
-      #implement circular browsing flow
-      if(session[:subscription_current] == session[:subscription_feeds].first)
-        session[:subscription_current] = session[:subscription_feeds].last
-      else
-        #Read literally as:          the previous feed_id in subscription_feeds before current subscribed feed
-        session[:subscription_current] = session[:subscription_feeds][session[:subscription_feeds].index(session[:subscription_current]) - 1]
-      end
-      return Post.load_entries_from_feed(session[:subscription_current], 5)
+    if not !!session[:subscription_feeds] or session[:subscription_feeds].empty?
+      return set_subscription_mode(def_feed)
     end
     
-    #Feed object filled with data for when a user has no subscriptions.
-    def no_subscriptions
-      errFeed = Feedzirra::Parser::RSS.new
-      errFeed.title = "No Subscriptions!"
-      errFeed.entries = [Feedzirra::Parser::RSSEntry.new]
-      #TODO change Time.now to PST zone
-      errFeed.entries.first.published = Time.now.to_s
-      errFeed.entries.first.title = "No active subscriptions"
-      errFeed.entries.first.content = errFeed.entries.first.summary = "You have no active subscriptions, go find something new and awesome that you connect with!"
-      errFeed
+    session[:read_mode] = :subscription
+    #implement circular browsing flow
+    if(session[:subscription_current] == session[:subscription_feeds].first)
+      session[:subscription_current] = session[:subscription_feeds].last
+    else
+      #Read literally as:          the previous feed_id in subscription_feeds before current subscribed feed
+      session[:subscription_current] = session[:subscription_feeds][session[:subscription_feeds].index(session[:subscription_current]) - 1]
     end
-    
-    #Feed object filled with data for an erroneous RSS feed
-    def error_feed
-      errFeed = Feedzirra::Parser::RSS.new
-      errFeed.title = "Error"
-      errFeed.entries = [Feedzirra::Parser::RSSEntry.new]
-      #TODO change Time.now to PST zone
-      errFeed.entries.first.published = Time.now.to_s
-      errFeed.entries.first.title = "Sorry! We can't find this feed!"
-      errFeed.entries.first.content = errFeed.entries.first.summary = "This feed is giving us an error, we will check into it!"
-      errFeed
-    end
+    return Post.load_entries_from_feed(session[:subscription_current], 5)
+  end
+  
+  #Feed object filled with data for when a user has no subscriptions.
+  def no_subscriptions
+    errPost = Post.new
+    errPost.title = "No Subscriptions!"
+    errPost.author = ""
+    #TODO remove hardcoding for explore link
+    errPost.summary = errPost.content = "You have no active subscriptions, go <a href='/explore'>explore</a> and find something new and awesome that you connect with!".html_safe
+    #TODO change Time.now to PST zone
+    errPost.published_at = Time.now
+    Array[errPost]
+  end
+  
+  #Feed object filled with data for an erroneous RSS feed
+  def error_feed
+    errPost = Feedzirra::Parser::RSS.new
+    errPost.title = "Error"
+    errPost.entries = [Feedzirra::Parser::RSSEntry.new]
+    #TODO change Time.now to PST zone
+    errPost.entries.first.published = Time.now.to_s
+    errPost.entries.first.title = "Sorry! We can't find this feed!"
+    errPost.entries.first.content = errPost.entries.first.summary = "This feed is giving us an error, we will check into it!"
+    Array[errPost]
+  end
 end
