@@ -47,6 +47,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 a{
 	outline: 0px none;
 	text-decoration: none;
+	color: #455560;
+}
+a:hover{
+	color: #f89728;
+}
+a:visited{
+	color: #455560;
 }
 .hero-section {
     padding: 0px;
@@ -362,7 +369,7 @@ input:-webkit-input-placeholder{
 	margin-bottom: 8px;
 }
 .container li{
-	margin: 0px 0px 5px 15px;
+	margin: 20px 0px 5px 15px;
 }
 .login-pane, .signup-pane{
 	position: absolute;

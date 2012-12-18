@@ -7,7 +7,7 @@ class ReaderController < ApplicationController
   #TODO
   #Have feeds read from random order but in a vote-weighted order
   def index
-    @posts = set_random_mode
+    @posts = set_random_mode(params[:feed_id])
   end
   
   def read_subscriptions

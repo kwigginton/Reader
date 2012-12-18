@@ -1,4 +1,5 @@
 class SupercategoriesController < ApplicationController
+  skip_before_filter :authorize_admin, :authorize_reader, only: [:show]
   # GET /supercategories
   # GET /supercategories.json
   def index
@@ -13,8 +14,10 @@ class SupercategoriesController < ApplicationController
   # GET /supercategories/1
   # GET /supercategories/1.json
   def show
-    @supercategory = Supercategory.find(params[:id])
-
+    @supercategory = Supercategory.find_by_name(params[:id])
+    if params[:view] == "feed"
+      @feeds = Feed.find(:all, include: :supercategories, conditions: ['supercategories.name in (?)',["#{params[:id]}"]])
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @supercategory }

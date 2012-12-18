@@ -3,20 +3,15 @@ module ReaderLogic
   #Sets reading_mode to random, instantiates the session variable 
   # => containing random feed ids to read if not already set, and
   # => shuffles them
-  def set_random_mode(def_feed = nil)
+  def set_random_mode(def_feed = nil, cat = nil)
     
     session[:read_mode] = :random
     
-    if session[:random_feeds] and not session[:random_feeds].empty? and session[:random_current]
-      #if user has just added a feed, or specified a feed, direct them there!
-      if(def_feed)
-        session[:random_current] = Feed.find(def_feed).id.to_i
-      end
-    else
+    unless session[:random_feeds] and not session[:random_feeds].empty? and session[:random_current]
       #Grab, randomize, and convert to int: all feed IDs
       session[:random_feeds] = ActiveRecord::Base.connection.select_values("select id from feeds").shuffle.collect{|s| s.to_i}
-      session[:random_current] = session[:random_feeds].first
     end
+    session[:random_current] = !!def_feed ? Feed.find(def_feed).id.to_i : session[:random_feeds].first
     return Post.load_entries_from_feed(session[:random_current], 5)
   end
 

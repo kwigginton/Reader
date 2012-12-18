@@ -5,7 +5,7 @@ module ApplicationHelper
   end
   
   def is_admin?
-    User.find_by_id(session[:user_id]).is_admin?
+    !!User.find_by_id(session[:user_id]) && User.find_by_id(session[:user_id]).is_admin?
   end
 
   def is_subscribed?(feed_id)

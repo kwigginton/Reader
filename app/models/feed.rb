@@ -8,7 +8,7 @@ class Feed < ActiveRecord::Base
   has_and_belongs_to_many :supercategories
   
   #vote relation
-  has_many :votes, as: :votable, dependent: :destroy
+  #has_many :votes, as: :votable, dependent: :destroy
   
   validate do |feed|
       feed.errors.add(:base, "Looks like that's not a valid feed, or the feed is not working!") unless !!Feedzirra::Feed.fetch_and_parse(feed.feed_url)

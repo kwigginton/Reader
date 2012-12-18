@@ -1,13 +1,13 @@
 <%= (is_admin? ? "<h1>Listing all subscriptions</h1>" : "<h1>Your subscriptions</h1>").html_safe %>
 <table class="neat">
+	<% if not @subscriptions.empty? %>
   <tr>
     <th>Feed</th>
     <th><% if is_admin? %># Subscribers<% end %></th>
     <th></th>
   </tr>
 
-<% if not @subscriptions.empty?
-    Subscription.select("DISTINCT ON (feed_id) *").each do |subscription| %>
+<% Subscription.select("DISTINCT ON (feed_id) *").each do |subscription| %>
       <tr>
         <td><%= Feed.find_by_id(subscription.feed_id).title %></td>
 		<% if is_admin? %><td><%= Feed.find(subscription.feed_id).subscriptions.count %></td><% end %>

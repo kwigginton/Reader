@@ -1,10 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @supercategory.name %>
+  <b>Viewing <%= @supercategory.name %> feeds:</b>
+  
 </p>
 
-
+<% if is_admin?%>
 <%= link_to 'Edit', edit_supercategory_path(@supercategory) %> |
 <%= link_to 'Back', supercategories_path %>
+<% end %>
+<ul class="feeds-listing">
+	<% @feeds.each do |f| %>
+
+<li><%= link_to f.title, reader_path(feed_id: f.id) %></li>
+<% end %>
+</ul>

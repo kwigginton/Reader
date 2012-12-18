@@ -17,7 +17,7 @@
   <script type="text/javascript">
       $(document).ready(function() {
           $('.entry a').click(function() {
-              window.open(this.href, 'onReader', 'width=700,height=800');
+              window.open(this.href, 'newWindow', 'scrollbars=1,width=700,height=800');
               return false;
           });
       });
@@ -101,7 +101,7 @@
 		</nav>
 		<div class="view">
 			<header class="centered-element blog-title"><h1><%= curr_feed.title %></h1></header>
-			<header class="centered-element category"><b>Category: </b><%= curr_feed.supercategories.join ", " %></header>
+			<header class="centered-element category"><b>Category: </b><%= curr_feed.supercategories.collect{|sc| sc.name}.join(", ") %></header>
 			<div class="underlay">
 				<%= yield %>
 			</div>

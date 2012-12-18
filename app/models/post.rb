@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   attr_accessible :author, :content, :feed_id, :rank, :summary, :title, :published_at, :guid, :url
   
   belongs_to :feed
-  has_many :votes, as: :votable, dependent: :destroy
+  #has_many :votes, as: :votable, dependent: :destroy
   has_and_belongs_to_many :categories
   
   default_scope order('published_at desc')
