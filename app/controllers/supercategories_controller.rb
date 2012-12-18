@@ -14,9 +14,9 @@ class SupercategoriesController < ApplicationController
   # GET /supercategories/1
   # GET /supercategories/1.json
   def show
-    @supercategory = Supercategory.find_by_name(params[:id])
+    @supercategory = Supercategory.find(params[:id])
     if params[:view] == "feed"
-      @feeds = Feed.find(:all, include: :supercategories, conditions: ['supercategories.name in (?)',["#{params[:id]}"]])
+      @feeds = Feed.find(:all, include: :supercategories, conditions: ['supercategories.id in (?)',["#{@supercategory.id}"]])
     end
     respond_to do |format|
       format.html # show.html.erb

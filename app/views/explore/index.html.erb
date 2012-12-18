@@ -3,7 +3,7 @@
 <ul class="supercats-listing">
 	<% @supercategories.each do |sc| %>
 	<li>
-		<%= link_to sc.name, supercategory_path(sc.name, view: :feed)%>
+		<%= link_to sc.name, supercategory_path(sc, view: :feed)%>
 		</br>
 		<%= sc.feed_ids.count %> feeds
 	</li>

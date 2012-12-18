@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Viewing <%= @supercategory.name %> feeds:</b>
+  <b>Viewing <%= @supercategory.name if @supercategory%> feeds:</b>
   
 </p>
 
@@ -10,8 +10,10 @@
 <%= link_to 'Back', supercategories_path %>
 <% end %>
 <ul class="feeds-listing">
-	<% @feeds.each do |f| %>
+	<% if !!@feeds
+		 @feeds.each do |f| %>
 
 <li><%= link_to f.title, reader_path(feed_id: f.id) %></li>
-<% end %>
+	<%   end 
+	   end   %>
 </ul>
