@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   belongs_to :feed
   #has_many :votes, as: :votable, dependent: :destroy
   has_and_belongs_to_many :categories
+  has_and_belongs_to_many :supercategories
   
   default_scope order('published_at desc')
   

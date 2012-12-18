@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215003538) do
+ActiveRecord::Schema.define(:version => 20121218202614) do
 
   create_table "categories", :force => true do |t|
     t.string   "category_name"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(:version => 20121215003538) do
     t.string   "guid"
     t.datetime "published_at"
     t.string   "url"
+  end
+
+  create_table "posts_supercategories", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "supercategory_id"
   end
 
   create_table "subscriptions", :force => true do |t|

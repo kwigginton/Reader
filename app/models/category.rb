@@ -7,19 +7,20 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :supercategories
   
   # All category_name values stored downcase
+  # std setter method override
   def category_name=(value)
     self[:category_name] = value && value.downcase
   end
   
-  #Accepts only a single category string
+  #Accepts single Category as string, and Supercategory as array of Supercategories
   #TODO correct handling to  parse out and and + keywords with 
-  def self.parse(cat)
+  def self.parse(cat, supercat = nil)
     if exists? category_name: cat.downcase
       return Category.find_by_category_name(cat)
     else
       create!(
         category_name: cat
-      )
+      ).supercategories = supercat
     end
   end
 end

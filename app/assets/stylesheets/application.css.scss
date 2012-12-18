@@ -44,6 +44,9 @@ ol,ul{
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
     display: block;
 }
+label{
+	text-align: center;
+}
 a{
 	outline: 0px none;
 	text-decoration: none;
