@@ -12,7 +12,8 @@ class Post < ActiveRecord::Base
   serialize :content
   
   def self.parse_from_feed(feed_id)
-    Feedzirra::Feed.fetch_and_parse(Feed.find(feed_id).feed_url).entries.each do |entry|
+    feed = Feed.find(feed_id)
+    Feedzirra::Feed.fetch_and_parse(feed.feed_url).entries.each do |entry|
       unless exists? guid: entry.id
         
         p = create!(
@@ -24,9 +25,9 @@ class Post < ActiveRecord::Base
           published_at: entry.published,
           url: entry.url,
           guid: entry.id
-        )
+        ).supercategories = feed.supercategories
         entry.categories.each do |cat|
-          if(cat = Category.parse(cat))
+          if(cat = Category.parse(cat, feed.supercategories))
             p.categories << cat
           end
         end

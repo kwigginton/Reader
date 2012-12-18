@@ -32,7 +32,7 @@ module ReaderLogic
       session[:subscription_feeds] = ActiveRecord::Base.connection.select_values("select feed_id from subscriptions where user_id =#{session[:user_id]}").collect{|s| s.to_i}
       session[:subscription_current] = session[:subscription_feeds].first
     end
-    return session[:subscription_feeds].empty? ? no_subscriptions  : Post.load_entries_from_feed(session[:subscription_current], 5)
+    return session[:subscription_feeds].empty? ? no_subscriptions : Post.load_entries_from_feed(session[:subscription_current], 5)
   end
   
   def get_next_random(def_feed = nil)
@@ -80,7 +80,7 @@ module ReaderLogic
     if(session[:subscription_current] == session[:subscription_feeds].last)
         session[:subscription_current] = session[:subscription_feeds].first
     else
-        #Read literally as:          the next feed_id in subscription_feeds after current subscribed feed
+        #Read literally as: the next feed_id in subscription_feeds after current subscribed feed
         session[:subscription_current] = session[:subscription_feeds][session[:subscription_feeds].index(session[:subscription_current]) + 1]
     end
 
