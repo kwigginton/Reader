@@ -44,7 +44,7 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(params[:feed])
     feed = Feedzirra::Feed.fetch_and_parse(@feed.feed_url)
-    if(feed && !(feed.is_a? Fixnum))
+    if(feed && !(feed.is_a? Fixnum) && !!feed.entries)
       #Populate Feed object
       @feed.title = feed.title
       @feed.author = feed.entries.first.author
