@@ -3,7 +3,7 @@ class Feed < ActiveRecord::Base
   validates :feed_url, :uniqueness => true, :presence => true
   
   has_many :subscriptions, dependent: :destroy
-  has_many :posts
+  has_many :posts, dependent: :destroy #remove all posts when feed is removed... To retain posts, we need better viewing/structure
   has_many :users, :through => :subscriptions
   has_and_belongs_to_many :supercategories
   

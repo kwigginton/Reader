@@ -25,7 +25,8 @@ class Post < ActiveRecord::Base
           published_at: entry.published,
           url: entry.url,
           guid: entry.id
-        ).supercategories = feed.supercategories
+        )
+        p.supercategories = feed.supercategories
         entry.categories.each do |cat|
           if(cat = Category.parse(cat, feed.supercategories))
             p.categories << cat

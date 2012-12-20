@@ -53,13 +53,18 @@ class FeedsController < ApplicationController
     respond_to do |format|
       if @feed.save
         #Place newly added/saved feed into reading list for current user just after previously read feed
-        session[:random_feeds].insert(session[:random_feeds].index(session[:random_current]), session[:random_current] = @feed.id)
+        session[:random_feeds].insert(session[:random_feeds].index(session[:random_current]), session[:random_current] = @feed.id) if session[:random_feeds]
         #assume they want to be subscribed to it
         Subscription.create!(user_id: session[:user_id], feed_id: @feed.id)
         #parse posts from the feed
         Post.parse_from_feed(@feed.id)
-        format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
-        format.json { render json: @feed, status: :created, location: @feed }
+        if(session[:read_mode])
+          format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
+          format.json { render json: @feed, status: :created, location: @feed }
+        else
+          format.html { redirect_to reader_path(feed_id: @feed.id)}
+          format.json { render json: @feed, status: :created, location: @feed }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @feed.errors, status: :unprocessable_entity }
