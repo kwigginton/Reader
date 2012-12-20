@@ -1,0 +1,8 @@
+$('.underlay').append("<%= escape_javascript(render(:partial => 'entries')) %>");
+var href = $('.more-link').attr('href').replace(/page=.*/, '');
+var page = parseInt($('.more-link').attr('href').replace(/.*page=/, ''));
+page +=1;
+var html = $('.more');
+$('.more').remove();
+$('.underlay').append(html);
+$('.more-link').attr('href', function(){return href+"page="+page})

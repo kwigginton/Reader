@@ -35,17 +35,17 @@ class Post < ActiveRecord::Base
     end
   end
   
-  # Return posts associated with specified feed, count is 1-based
-  def self.load_entries_from_feed(feed_id, count = 0)
-    if(count < 1)
+  # Return posts associated with specified feed, page is 0-based
+  def self.load_entries_from_feed(feed_id, page = -1)
+    if(page < 0)
       self.find_all_by_feed_id(feed_id)
     else
-      self.find_all_by_feed_id(feed_id)[0..count-1]
+      self.find_all_by_feed_id(feed_id)[page*5..(page+1)*5-1]
     end
   end
   
 =begin
-  #deprecated, feed_data is no longer stored in feeds.
+  #deprecated, feed_data is no longer stored in feeds table.
   def self.update_from_feed(feed_id)
     #The following line is here because I want to move away from storing bulky feeds in the Feed model
     #feed = Feedzirra::Feed.fetch_and_parse(Feed.find(feed_id).feed_url)

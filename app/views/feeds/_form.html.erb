@@ -19,7 +19,7 @@
 	<label for="feed_supercategories">How would you classify this feed?</label><br />
 	<% Supercategory.all.each do |supercategory|%>
 	<div>
-		<%= check_box_tag "feed[supercategory_ids][]", supercategory.id, @feed.supercategories.include?(supercategory)%>
+		<%= radio_button_tag "feed[supercategory_ids][]", supercategory.id, @feed.supercategories.include?(supercategory)%>
 		<%= supercategory.name%>
 	</div>
 	<% end %>

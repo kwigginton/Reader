@@ -10,5 +10,9 @@
 		<%= f.password_field :password_confirmation, :class => "password-confirm", :placeholder => "Confirm Password", :onblur => "if (this.placeholder =='') this.placeholder='Confirm Password';".html_safe %>
 		<%= f.submit "Start Reading", :class => 'button start' %>
 	<% end %>
+<% else %>
+	<div class="user-get-started ">
+		<h1 class="headline">Welcome back, <%= current_user.email %>!</h1>
+		<%= link_to "Get Reading!", reader_path, :class => 'button start'%>
 <% end %>
 </div>

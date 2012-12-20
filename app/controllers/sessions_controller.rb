@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
           session[:return_to] = nil
           return
         end
-        redirect_to eval("#{user.role}_url")
+        redirect_to welcome_url #eval("#{user.role}_url")
         
       else
         redirect_to login_url, :alert => "Invalid Email or Password"

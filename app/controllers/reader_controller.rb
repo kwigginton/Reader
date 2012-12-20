@@ -1,7 +1,7 @@
 class ReaderController < ApplicationController
   include ReaderLogic
   
-  skip_before_filter :authorize_admin, :authorize_reader, :only => [:index, :next_random, :previous_random]
+  skip_before_filter :authorize_admin, :authorize_reader, :only => [:index, :next_random, :previous_random, :load_more]
   skip_before_filter :authorize_admin, :only => [:read_subscriptions, :next_subscription, :previous_subscription]
   #The default index action for this view leads the user to a random view of feeds from the database.
   #TODO
@@ -34,6 +34,17 @@ class ReaderController < ApplicationController
     @posts = get_previous_random
     render :index
   end
+  
+  def load_more
+    if request.xhr?
+      @posts = Post.load_entries_from_feed(params[:feed_id].to_i, params[:page].to_i)
+      respond_to do |format|
+        format.js{@posts}
+      end
+    else
+      not_found
+    end
+    end
   
   protected
   def curr_feed

@@ -5,7 +5,7 @@ Reader::Application.routes.draw do
 
   get 'about'=> 'static_pages#about'
 
-  get 'faq' => 'static_pages#faq'
+  #get 'faq' => 'static_pages#faq'
 
   resources :subscriptions
   
@@ -14,7 +14,7 @@ Reader::Application.routes.draw do
   get "welcome/index"
 
   get 'admin' => 'admin#index'
-  
+
   get 'reader' => 'reader#index'
   
   get "reader/subscriptions" => 'reader#read_subscriptions'
@@ -27,6 +27,7 @@ Reader::Application.routes.draw do
   
   get "reader/previous_subscription" => 'reader#previous_subscription'
     
+  get "reader/load_more" => 'reader#load_more'
   controller :sessions do
     get    'login'  => :new
     post   'login'  => :create
