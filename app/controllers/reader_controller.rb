@@ -35,13 +35,13 @@ class ReaderController < ApplicationController
   
   def next_random
     @posts = get_next_random
-    render :index
+    render :read_random
 
   end
   
   def previous_random
     @posts = get_previous_random
-    render :index
+    render :read_random
   end
   
   def load_more
