@@ -17,6 +17,6 @@
 <% else %>
 	<div class="user-get-started ">
 		<h1 class="headline">Welcome back, <%= current_user.email %>!</h1>
-		<%= link_to "Get Reading!", reader_random_path, :class => 'button start'%>
+		<%= link_to "Get Reading!", reader_path, :class => 'button start'%>
 <% end %>
 </div>

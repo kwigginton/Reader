@@ -25,12 +25,12 @@ class ReaderController < ApplicationController
   
   def next_subscription
     @posts = get_next_subscription
-    render 'read_subscriptions'
+    render :read_subscriptions
   end
   
   def previous_subscription
     @posts = get_previous_subscription
-    render 'read_subscriptions'
+    render :read_subscriptions
   end
   
   def next_random
