@@ -18,9 +18,11 @@ class Category < ActiveRecord::Base
     if exists? category_name: cat.downcase
       return Category.find_by_category_name(cat)
     else
-      create!(
+      newcat = create!(
         category_name: cat
-      ).supercategories = supercat
+      )
+      newcat.supercategories = supercat
+      newcat
     end
   end
 end
