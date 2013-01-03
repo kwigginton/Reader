@@ -3,7 +3,7 @@ class ReaderController < ApplicationController
   
   layout 'application', :only => [:index]
   
-  skip_before_filter :authorize_admin, :authorize_reader, :only => [:index, :next_random, :previous_random, :load_more]
+  skip_before_filter :authorize_admin, :authorize_reader, :only => [:index, :read_random, :next_random, :previous_random, :load_more]
   skip_before_filter :authorize_admin, :only => [:read_subscriptions, :next_subscription, :previous_subscription]
   
   
