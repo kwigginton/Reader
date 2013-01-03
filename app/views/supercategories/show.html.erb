@@ -13,7 +13,7 @@
 	<% if !!@feeds
 		 @feeds.each do |f| %>
 
-<li><%= link_to f.title, reader_path(feed_id: f.id) %></li>
+<li><%= link_to f.title, reader_random_path(feed_id: f.id) %></li>
 	<%   end 
 	   end   %>
 </ul>

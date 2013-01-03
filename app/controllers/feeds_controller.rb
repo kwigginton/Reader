@@ -59,10 +59,10 @@ class FeedsController < ApplicationController
         #parse posts from the feed
         Post.parse_from_feed(@feed.id)
         if(session[:read_mode])
-          format.html { redirect_to reader_path, notice: 'Feed was successfully created.' }
+          format.html { redirect_to reader_random_path, notice: 'Feed was successfully created.' }
           format.json { render json: @feed, status: :created, location: @feed }
         else
-          format.html { redirect_to reader_path(feed_id: @feed.id)}
+          format.html { redirect_to reader_random_path(feed_id: @feed.id)}
           format.json { render json: @feed, status: :created, location: @feed }
         end
       else

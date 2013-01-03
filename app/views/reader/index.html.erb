@@ -1,1 +1,14 @@
-<%= render partial: "entries", object: @posts %>
+<div class="reader-select-pane">
+	<%= link_to reader_random_path do%>
+	<span class="select-random">
+		<%= image_tag "shuffle.png", alt: "shuffle"%>
+		<h1>Read Random Articles</h1>
+	</span>
+	<% end%>
+	<%= link_to reader_subscriptions_path do%>
+	<span class="select-subscription">
+		<%= image_tag "starred.png", alt: "subscriptions"%>
+		<h1>Read My Subscriptions</h1>
+	</span>
+	<% end %>
+</div>

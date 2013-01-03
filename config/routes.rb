@@ -19,6 +19,8 @@ Reader::Application.routes.draw do
   
   get "reader/subscriptions" => 'reader#read_subscriptions'
   
+  get "reader/random" => 'reader#read_random'
+  
   get "reader/next_random" => 'reader#next_random'
   
   get "reader/previous_random" => 'reader#previous_random'

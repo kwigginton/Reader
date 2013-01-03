@@ -286,9 +286,9 @@ input:-webkit-input-placeholder{
 	top: 160px;
 	width: 255px;
 	height: 180px;
-	right: 50px;
+	left: 750px;
 	padding: 0px 20px;
-	position: absolute;
+	position: relative;
 	display: block;
 }
 .user-get-started{
@@ -297,9 +297,9 @@ input:-webkit-input-placeholder{
 		top: 160px;
 		width: 255px;
 		height: 180px;
-		right: 50px;
+		left: 750px;
 		padding: 0px 20px;
-		position: absolute;
+		position: relative;
 		display: block;
 		text-align: center;
 	}
@@ -351,4 +351,23 @@ input:-webkit-input-placeholder{
 }
 .user-nav a:visited{
 	color: #455560;
+}
+.read-link{
+	width: 125px;
+	height: 70px;
+	position: absolute;
+}
+.share-link{
+	right: 0px;
+	width: 130px;
+	height: 70px;
+	position: absolute;
+}
+.write-link{
+	bottom: 20px;
+	left: 5px;
+	width: 125px;
+	height: 85px;
+	position: absolute;
+	
 }

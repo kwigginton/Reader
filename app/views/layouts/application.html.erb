@@ -3,7 +3,7 @@
 <head>
   <title>onReader - <%= yield(:title).empty? ? "Reading, Redefined" : yield(:title) %></title>
   
-  <%= stylesheet_link_tag params[:controller] %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 

@@ -1,12 +1,21 @@
 class ReaderController < ApplicationController
   include ReaderLogic
   
+  layout 'application', :only => [:index]
+  
   skip_before_filter :authorize_admin, :authorize_reader, :only => [:index, :next_random, :previous_random, :load_more]
   skip_before_filter :authorize_admin, :only => [:read_subscriptions, :next_subscription, :previous_subscription]
-  #The default index action for this view leads the user to a random view of feeds from the database.
+  
+  
+  
   #TODO
   #Have feeds read from random order but in a vote-weighted order
+  
   def index
+    render layout: 'application'
+  end
+  
+  def read_random
     @posts = set_random_mode(params[:feed_id])
   end
   

@@ -1,4 +1,8 @@
+<%= stylesheet_link_tag "welcome" %>
 <div class="intro">
+	<%= link_to content_tag(:span,'', :class => 'read-link'), reader_path%>
+	<%= link_to content_tag(:span,'', :class => 'share-link'), welcome_url%>
+	<%= link_to content_tag(:span,'', :class => 'write-link'), welcome_url%>
 	<%= image_tag "front.png"%>
 </div>
 <% if !is_logged_in? %>
@@ -13,6 +17,6 @@
 <% else %>
 	<div class="user-get-started ">
 		<h1 class="headline">Welcome back, <%= current_user.email %>!</h1>
-		<%= link_to "Get Reading!", reader_path, :class => 'button start'%>
+		<%= link_to "Get Reading!", reader_random_path, :class => 'button start'%>
 <% end %>
 </div>
