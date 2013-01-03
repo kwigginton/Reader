@@ -63,14 +63,15 @@
 			</div>
 		</div>
 		<div class="footer-nav">
-			<p class="copyright">© 2012 onReader. All rights reserved.</p>
-			<p>
+			<span class="copyright">© 2012 onReader. All rights reserved.</span>
+			</br>
+			<span>
 				<% if mobile_device? %>
 					<%= link_to "Full Site", mobile: 0 %>
 				<% else %>
 					<%= link_to "Mobile Site", mobile: 1 %>
 				<% end %>
-			</p>
+			</span>
 		</div>
 	</div>
 	<script type="text/javascript">
